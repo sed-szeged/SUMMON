@@ -1,0 +1,44 @@
+version: '3'
+services:
+######################
+# Setup mongo container
+######################
+  mongodb:
+    image: "mongo"
+    ports:
+      - "27017:27017"
+######################
+# Setup node container
+######################
+  backend:
+    build: ./node-backend
+    environment:
+      API_HOST: "${API_HOST}"
+      APP_SERVER_PORT: "6200"
+    expose:
+      - "6200"
+    ports:
+      - "6200:6200"
+    volumes:
+      - ./node-backend:/usr/src/app
+    command: nodemon server.js
+    depends_on:
+      - mongodb
+######################
+# Setup react container
+######################
+  frontend:
+    build: ./react-frontend
+    environment:
+      - REACT_APP_PORT="3000"
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./react-frontend:/usr/src/app
+    links:
+      - backend
+    depends_on:
+      - backend
+    command: npm start

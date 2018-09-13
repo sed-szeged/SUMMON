@@ -1,0 +1,14 @@
+Docker:
+	START MONGO: https://linuxconfig.org/how-to-install-docker-on-ubuntu-18-04-bionic-beaver
+		$ sudo su
+		$ sudo systemctl start docker
+		$ sudo systemctl enable docker
+
+	COMPOSE BUILD
+		$ sudo su
+		$ docker-compose up --build
+
+	START SPECIFIC MONGO SERVICE
+		$ docker-compose up <servicename>
+
+	
