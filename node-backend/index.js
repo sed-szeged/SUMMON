@@ -3,11 +3,15 @@ const app = require("./src/app");
 
 const server = http.createServer(app);
 
-const port = 6200;
+const port = 6201;
 
-process.on('uncaughtException', (err) => {
-  console.log(err)
-})
+process.on("uncaughtException", e => {
+  console.log(e);
+});
+
+process.on("unhandledRejection", e => {
+  console.log(e);
+});
 
 server.listen(port, () => {
   console.log(`Server started on port ${port}`);
