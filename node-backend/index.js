@@ -3,7 +3,7 @@ const app = require("./src/app");
 
 const server = http.createServer(app);
 
-const port = 6201;
+const port = 6200;
 
 process.on("uncaughtException", e => {
   console.log(e);

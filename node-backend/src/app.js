@@ -7,7 +7,7 @@ const app = express();
 // dev: mongodb://localhost:27017/oscd
 mongoose
   .connect(
-    "mongodb://localhost:27017/oscd",
+    "mongodb://mongodb/oscd",
     { useNewUrlParser: true }
   )
   .then(() => {
@@ -17,6 +17,9 @@ mongoose
     console.log("Mongodb error... ", err.stack);
     process.exit(1);
   });
+
+// Calls all the middlewares
+require("./middlewares/startup/index")(app);
 
 // Calls all the routes
 require("./routes/index")(app);

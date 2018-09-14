@@ -52,14 +52,27 @@ function validateAdmin(admin) {
       .required()
       .alphanum()
   };
-  try {
-    return Joi.validate(admin, joiSchema);
-  } catch (e) {
-    console.log("catches");
-  }
+  return Joi.validate(admin, joiSchema);
+}
+
+function validateLogin(credentials) {
+  const joiSchema = {
+    email: Joi.string()
+      .min(4)
+      .max(255)
+      .email()
+      .required(),
+    password: Joi.string()
+      .min(6)
+      .max(64)
+      .required()
+      .alphanum()
+  };
+  return Joi.validate(credentials, joiSchema);
 }
 
 module.exports = {
   Admin: mongoose.model("admins", AdminSchema),
-  validateAdmin: validateAdmin
+  validateAdmin: validateAdmin,
+  validateLogin: validateLogin
 };
