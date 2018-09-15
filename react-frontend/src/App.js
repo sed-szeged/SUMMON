@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Notifications from "react-notify-toast";
 
 import "./App.css";
@@ -22,6 +22,8 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Navbar />
+            <Link to="/admin/register">admin</Link>
+            <Link to="/">main</Link>
             <Notifications options={{ zIndex: 200, top: "12 rem" }} />
             <Switch>
               <Route exact path="/login" component={Login} />

@@ -1,7 +1,26 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutAdmin } from "../../../redux/actions/auth/authActions";
 
 class Navbar extends Component {
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutAdmin();
+  };
+
   render() {
+    const { isAuthenticated, admin } = this.props.auth;
+
+    const authLinks = (
+      <ul className="right hide-on-med-and-down">
+        <li>
+          <a onClick={this.onLogoutClick}>Logout</a>
+        </li>
+      </ul>
+    );
+
     return (
       <div>
         <nav>
@@ -20,16 +39,8 @@ class Navbar extends Component {
               <li>
                 <a href="sass.html">Sass</a>
               </li>
-              <li>
-                <a href="badges.html">Components</a>
-              </li>
-              <li>
-                <a href="collapsible.html">Javascript</a>
-              </li>
-              <li>
-                <a href="mobile.html">Mobile</a>
-              </li>
             </ul>
+            {isAuthenticated ? authLinks : null}
           </div>
         </nav>
 
@@ -37,19 +48,22 @@ class Navbar extends Component {
           <li>
             <a href="sass.html">Sass</a>
           </li>
-          <li>
-            <a href="badges.html">Components</a>
-          </li>
-          <li>
-            <a href="collapsible.html">Javascript</a>
-          </li>
-          <li>
-            <a href="mobile.html">Mobile</a>
-          </li>
         </ul>
       </div>
     );
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  logoutAdmin: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutAdmin }
+)(Navbar);

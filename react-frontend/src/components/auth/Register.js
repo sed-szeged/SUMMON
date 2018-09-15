@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { registerAdmin } from "../../redux/actions/auth/authActions";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { notify } from "react-notify-toast";
 
 class Register extends Component {
   constructor(props) {
@@ -27,8 +26,6 @@ class Register extends Component {
     if (nextProps.errors) {
       if (typeof nextProps.errors === "object") {
         this.setState({ errors: nextProps.errors });
-      } else if (typeof nextProps.errors === "string") {
-        notify.show(nextProps.errors, "error");
       }
     }
   }

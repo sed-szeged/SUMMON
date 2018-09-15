@@ -1,4 +1,5 @@
-import { GET_ERRORS } from "../../actions/types";
+import isEmpty from "../../../utils/isEmpty";
+import { SET_CURRENT_ADMIN } from "../../actions/types";
 
 const initialState = {
   isAuthenticated: false,
@@ -7,9 +8,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case "":
+    case SET_CURRENT_ADMIN:
+      console.log("SET_CURRENT_ADMIN");
       return {
         ...state,
+        isAuthenticated: !isEmpty(action.payload),
         admin: action.payload
       };
     default:
