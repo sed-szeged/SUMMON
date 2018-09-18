@@ -15,7 +15,7 @@ const validateAdmin = require("../../models/Admin").validateAdmin;
 
 // @route POST /api/post-admin/
 // @desc Inserting new admin into the database
-// Private - SuperAdmin
+// Private - SuperUser
 router.post(
   "/",
   errorMiddleware(async (req, res) => {

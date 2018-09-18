@@ -5,7 +5,7 @@ const jwtSecretKey = require("../../config/keys/keys").jwtSecretKey;
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.jwtSecretKey = jwtSecretKey;
+options.secretOrKey = jwtSecretKey;
 
 //passport.authenticate("jwt",{session:false})
 module.exports = passport => {
@@ -13,7 +13,7 @@ module.exports = passport => {
     new JwtStrategy(options, (jwt_paylod, done) => {
       Admin.findById(jwt_paylod.id)
         .then(admin => {
-          if (user) {
+          if (admin) {
             done(null, admin);
           } else {
             done(null, false);

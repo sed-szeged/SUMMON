@@ -8,7 +8,7 @@ module.exports = function(app) {
   // Passport
   app.use(passport.initialize());
   // Passport Strategy
-  require("../passport/passportMiddleware");
+  require("../passport/passportMiddleware")(passport);
   app.use(express.static("public"));
   // Body Parser Middleware
   app.use(bodyParser.urlencoded({ extended: false }));

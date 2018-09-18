@@ -1,5 +1,4 @@
 const Joi = require("joi");
-const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
