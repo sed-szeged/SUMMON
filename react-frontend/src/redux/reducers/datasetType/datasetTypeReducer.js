@@ -1,8 +1,6 @@
-import { ADD_DATASETTYPE } from "../../actions/types";
+import { ADD_DATASETTYPE, DATASETTYPE_FOR_SELECT } from "../../actions/types";
 
-const initialState = {
-  datasetType: {}
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {

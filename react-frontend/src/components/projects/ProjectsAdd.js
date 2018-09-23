@@ -7,6 +7,7 @@ import ReactSelect from "react-select";
 import projectTypes from "../../utils/constants/ProjectTypes";
 
 import { projectAdd } from "../../redux/actions/project/projectActions";
+import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 
 class ProjectsAdd extends Component {
   constructor(props) {
@@ -23,13 +24,14 @@ class ProjectsAdd extends Component {
         country: "",
         location: "",
         website: "",
-        description: ""
+        description: "",
+        projectType: ""
       }
     };
+    this.props.setErrorToInitialState();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
       if (nextProps.errors.description)
@@ -62,7 +64,7 @@ class ProjectsAdd extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div className="">
         <h5>Add a New Project</h5>
         {/*name*/}
         <div className="input-field col s12 l6">
@@ -188,5 +190,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { projectAdd }
+  { projectAdd, setErrorToInitialState }
 )(ProjectsAdd);
