@@ -35,6 +35,9 @@ class Navbar extends Component {
             <Link to="/admin/projects">Project</Link>
           </li>
           <li>
+            <Link to="/admin/datasets">Dataset</Link>
+          </li>
+          <li>
             <Link to="/admin/datasettype">Dataset Type</Link>
           </li>
         </ul>

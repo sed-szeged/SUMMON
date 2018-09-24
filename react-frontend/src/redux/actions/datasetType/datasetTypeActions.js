@@ -1,4 +1,4 @@
-import { GET_ERRORS, ADD_DATASETTYPE } from "../types";
+import { GET_ERRORS, SET_DATASETTYPE_SELECT } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
 
@@ -18,6 +18,24 @@ export const datasetTypeAdd = datasetTypeData => dispatch => {
           type: GET_ERRORS,
           payload: err.response.data
         });
+      }
+    });
+};
+
+export const getDatasetTypesForSelect = () => dispatch => {
+  axios
+    .get("/get-datasettype/select/")
+    .then(res => {
+      if (res.data) {
+        dispatch({
+          type: SET_DATASETTYPE_SELECT,
+          payload: res.data
+        });
+      }
+    })
+    .catch(err => {
+      if (typeof err.response.data === "string") {
+        notify.show(err.response.data, "error");
       }
     });
 };

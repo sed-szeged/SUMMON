@@ -1,4 +1,4 @@
-import { ADD_DATASETTYPE, DATASETTYPE_FOR_SELECT } from "../../actions/types";
+import { ADD_DATASETTYPE, SET_DATASETTYPE_SELECT } from "../../actions/types";
 
 const initialState = {};
 
@@ -8,6 +8,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         datasetType: action.payload
+      };
+    case SET_DATASETTYPE_SELECT:
+      return {
+        ...state,
+        datasetTypeSelect: action.payload
       };
     default:
       return state;

@@ -11,9 +11,9 @@ Docker:
 	START SPECIFIC MONGO SERVICE
 		$ docker-compose up <servicename>
 
-	SSH INTO DOCKER CONTAINER
+	SSH INTO DOCKER CONTAINER (http://phase2.github.io/devtools/common-tasks/ssh-into-a-container/)
 		$ sudo su
-		$ sudo docker exec -ti <containername>
+		$ sudo docker exec -ti <containername> /bin/bash
 
 	FREE UP PORT
 		$sudo fuser -l <port>/tcp	

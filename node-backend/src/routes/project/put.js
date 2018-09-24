@@ -12,7 +12,7 @@ const errorMsg = require("../../config/constants/errors");
 const successMsg = require("../../config/constants/success");
 
 // @route PUT /api/put-project/id/:id
-// @desc Inserting new project into mongo
+// @desc Updating a project by ID
 // Private
 router.put(
   "/id/:id",

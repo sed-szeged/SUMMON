@@ -17,6 +17,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import DatasetTypeAdmin from "./components/datasettype/DatasetTypeAdmin";
 import ProjectsAdmin from "./components/projects/ProjectsAdmin";
+import DatasetsAdmin from "./components/datasets/DatasetAdmin";
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
                 component={DatasetTypeAdmin}
               />
               <Route exact path="/admin/projects" component={ProjectsAdmin} />
+              <Route exact path="/admin/datasets" component={DatasetsAdmin} />
             </Switch>
           </div>
         </BrowserRouter>
