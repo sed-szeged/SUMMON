@@ -40,6 +40,9 @@ class Navbar extends Component {
           <li>
             <Link to="/admin/datasettype">Dataset Type</Link>
           </li>
+          <li>
+            <Link to="/admin/requestqueries">Request Query</Link>
+          </li>
         </ul>
       </div>
     );

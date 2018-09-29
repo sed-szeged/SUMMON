@@ -1,4 +1,9 @@
-import { GET_ERRORS, SET_DATASET_SELECT, SET_DATASET } from "../types";
+import {
+  GET_ERRORS,
+  SET_DATASET_SELECT,
+  SET_DATASET,
+  SET_SELECTED_DATASET
+} from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
 
@@ -72,4 +77,11 @@ export const updateDatasetById = (id, dataset) => dispatch => {
         });
       }
     });
+};
+
+export const setSelectedDatasetId = id => dispatch => {
+  dispatch({
+    type: SET_SELECTED_DATASET,
+    payload: id
+  });
 };

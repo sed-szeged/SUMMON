@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DatasetSelect from "../layout/common/DatasetSelect";
 
 class Projects extends Component {
   constructor(props) {
@@ -9,7 +10,12 @@ class Projects extends Component {
   }
 
   render() {
-    return <div>{this.props.match.params.projectType}</div>;
+    return (
+      <div>
+        {this.props.match.params.projectType}
+        <DatasetSelect />
+      </div>
+    );
   }
 }
 
