@@ -19,6 +19,7 @@ class RequestQueryElements extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.queryArr) this.setState({ queryArr: nextProps.queryArr });
     if (nextProps.requestQuery)
       if (nextProps.requestQuery.json)
         this.setState({ jsonVal: nextProps.requestQuery.json });

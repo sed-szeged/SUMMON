@@ -73,6 +73,34 @@ function validateRequestQuery(requestQuery) {
   return Joi.validate(requestQuery, RequestQuerySchema);
 }
 
+function validateUpdateRequestQuery(requestQuery) {
+  const RequestQuerySchema = {
+    name: Joi.string()
+      .min(3)
+      .max(63),
+    queryURI: Joi.string()
+      .uri()
+      .max(512)
+      .required(),
+    execute: Joi.boolean().required(),
+    downloadable: Joi.boolean().required(),
+    interval: Joi.string().valid(
+      "minute",
+      "hour",
+      "4hour",
+      "6hour",
+      "12hour",
+      "daily"
+    ),
+    queryArr: Joi.array()
+      .min(1)
+      .max(10)
+      .required(),
+    id: Joi.string()
+  };
+  return Joi.validate(requestQuery, RequestQuerySchema);
+}
+
 function validateURI(uri) {
   const URISchema = {
     queryURI: Joi.string().uri()
@@ -88,5 +116,6 @@ module.exports = {
   validateURI: validateURI,
   validateRequestQuery: validateRequestQuery,
   RequestQuery: mongoose.model("requestqueries", RequestQuerySchema),
-  makeCollectionName: makeCollectionName
+  makeCollectionName: makeCollectionName,
+  validateUpdateRequestQuery: validateUpdateRequestQuery
 };

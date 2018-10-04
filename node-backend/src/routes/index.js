@@ -12,6 +12,7 @@ const getDataset = require("./dataset/get");
 const putDataset = require("./dataset/put");
 const postRequestQuery = require("./requestQuery/post");
 const getRequestQuery = require("./requestQuery/get");
+const putRequestQuery = require("./requestQuery/put");
 
 module.exports = function(app) {
   // ROUTES
@@ -27,4 +28,5 @@ module.exports = function(app) {
   app.use(API_BASE + "/put-dataset", putDataset);
   app.use(API_BASE + "/post-requestquery", postRequestQuery);
   app.use(API_BASE + "/get-requestquery", getRequestQuery);
+  app.use(API_BASE + "/put-requestquery", putRequestQuery);
 };

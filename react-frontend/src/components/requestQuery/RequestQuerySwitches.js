@@ -18,6 +18,17 @@ class RequestQuerySwitches extends Component {
     this.props.setDownloadable(this.props.downloadable || false);
   }
 
+  componentDidUpdate() {
+    console.log(this.state.execute);
+    console.log(this.state.downloadable);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.execute) this.setState({ execute: nextProps.execute });
+    if (nextProps.downloadable)
+      this.setState({ downloadable: nextProps.downloadable });
+  }
+
   executeOnChange = e => {
     this.setState({ execute: !this.state.execute }, () => {
       this.props.setExecute(this.state.execute);
@@ -47,7 +58,7 @@ class RequestQuerySwitches extends Component {
                 value={this.state.execute}
                 onChange={this.executeOnChange}
                 type="checkbox"
-                defaultChecked={this.state.execute}
+                checked={this.state.execute}
               />
               <span className="lever" />
               On
@@ -61,7 +72,7 @@ class RequestQuerySwitches extends Component {
                 value={this.state.downloadable}
                 onChange={this.downloadableOnChange}
                 type="checkbox"
-                defaultChecked={this.state.downloadable}
+                checked={this.state.downloadable}
               />
               <span className="lever" />
               On

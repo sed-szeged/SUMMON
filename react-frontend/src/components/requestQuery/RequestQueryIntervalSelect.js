@@ -14,12 +14,17 @@ class RequestQueryIntervalSelect extends Component {
     };
   }
 
-  componentDidMount() {
-    this.getInterval(this.props.interval);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.interval) {
+      this.setState({ interval: nextProps.interval });
+    }
+    if (nextProps.intervalVal) {
+      this.getInterval(nextProps.intervalVal);
+    }
   }
 
-  getInterval = intervalValue => {
-    if (this.props.interval) {
+  getInterval = (intervalValue = "daily") => {
+    if (this.props.intervalVal) {
       this.setState({
         interval:
           intervals[
@@ -51,7 +56,9 @@ class RequestQueryIntervalSelect extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  interval: state.requestQuery.interval
+});
 
 export default connect(
   mapStateToProps,

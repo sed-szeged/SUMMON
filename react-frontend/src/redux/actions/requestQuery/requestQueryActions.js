@@ -6,7 +6,11 @@ import {
   SET_DOWNLOADABLE,
   SET_INTERVAL,
   SET_QUERY_ARR,
-  SET_URI_DATA
+  SET_URI_DATA,
+  SET_REQUEST_QUERY_SELECT,
+  SET_SELECTED_REQUEST_QUERY,
+  SET_REQUEST_QUERY,
+  SET_REQUEST_QUERY_OBJECT_TO_UNDEF
 } from "../types";
 
 export const setExecute = bool => dispatch => {
@@ -47,7 +51,6 @@ export const getQueryUriData = uri => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err.response);
       if (err)
         if (err.response)
           if (typeof err.response.data === "string")
@@ -83,4 +86,73 @@ export const postNewRequestQuery = data => dispatch => {
         }
       }
     });
+};
+
+export const getRequestQueryForSelect = id => dispatch => {
+  axios
+    .get("/get-requestquery/select/datasetid/" + id)
+    .then(res => {
+      dispatch({
+        type: SET_REQUEST_QUERY_SELECT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (err.response) {
+        if (typeof err.response.data === "string")
+          notify.show(err.response.data, "error");
+      }
+      dispatch({
+        type: SET_REQUEST_QUERY_SELECT,
+        payload: []
+      });
+    });
+};
+
+export const setSelectedRequestQuerySelect = id => dispatch => {
+  dispatch({
+    type: SET_SELECTED_REQUEST_QUERY,
+    payload: id
+  });
+};
+
+export const getRequestQueryById = id => dispatch => {
+  axios
+    .get("/get-requestquery/" + id)
+    .then(res => {
+      dispatch({
+        type: SET_REQUEST_QUERY,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (err.response) {
+        if (typeof err.response.data === "string")
+          notify.show(err.response.data, "error");
+      }
+    });
+};
+
+export const updateRequestQueryById = data => dispatch => {
+  //put-requestquery/:id
+  axios
+    .put("/put-requestquery/" + data.id, data)
+    .then(res => {
+      if (typeof res.data === "string") {
+        notify.show(res.data, "success");
+      }
+    })
+    .catch(err => {
+      if (err.response) {
+        if (typeof err.response.data === "string")
+          notify.show(err.response.data, "error");
+      }
+    });
+};
+
+export const setSelectedRequestQueryToUndefined = data => dispatch => {
+  dispatch({
+    type: SET_REQUEST_QUERY_OBJECT_TO_UNDEF,
+    payload: data
+  });
 };

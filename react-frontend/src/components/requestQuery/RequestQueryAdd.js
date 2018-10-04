@@ -65,7 +65,7 @@ class RequestQueryAdd extends Component {
   }
 
   getQueryUriData = e => {
-    if (this.state.querURI !== "")
+    if (this.state.queryURI !== "")
       this.props.getQueryUriData({ queryURI: this.state.queryURI });
     else notify.show("Provide a valid API", "error");
   };
@@ -77,6 +77,7 @@ class RequestQueryAdd extends Component {
   render() {
     return (
       <div>
+        <div className="card">Add a Request Query</div>
         <DatasetSelect />
         <div className="row">
           <div className="input-field col s12 l7">

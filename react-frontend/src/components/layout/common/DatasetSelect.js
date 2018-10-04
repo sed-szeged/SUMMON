@@ -22,9 +22,6 @@ class DatasetSelect extends Component {
 
   componentWillMount() {
     this.props.setSelectedDatasetId(undefined);
-  }
-
-  componentWillUnMount() {
     this.props.setSelectedDatasetId(undefined);
   }
 

@@ -4,6 +4,7 @@ import LeftSidePanel from "../layout/common/LeftSidePanel";
 import ContentContainer from "../layout/common/ContentContainer";
 import RightSidePanel from "../layout/common/RightSidePanel";
 import RequestQueryAdd from "./RequestQueryAdd";
+import RequestQueryManage from "./RequestQueryManage";
 
 class RequestQueryAdmin extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class RequestQueryAdmin extends Component {
               </a>
             </div>
           </div>
-          {this.state.bool ? <RequestQueryAdd /> : "manage"}
+          {this.state.bool ? <RequestQueryAdd /> : <RequestQueryManage />}
         </ContentContainer>
         <RightSidePanel />
       </div>

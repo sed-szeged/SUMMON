@@ -70,7 +70,7 @@ router.post(
 // Private
 router.post(
   "/queryuri",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   errorMiddleware((req, res) => {
     const { error } = validateURI(req.body);
     if (error) return res.status(400).send(errorToJson(error));
@@ -81,7 +81,7 @@ router.post(
         return res.send(response.data);
       })
       .catch(err => {
-        return res.status(err.response.data);
+        return res.status(500).send(errorMsg.INTERNAL_SERVER_ERROR);
       });
   })
 );
