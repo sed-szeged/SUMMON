@@ -19,6 +19,7 @@ import DatasetTypeAdmin from "./components/datasettype/DatasetTypeAdmin";
 import ProjectsAdmin from "./components/projects/ProjectsAdmin";
 import DatasetsAdmin from "./components/datasets/DatasetAdmin";
 import RequestQueryAdmin from "./components/requestQuery/RequestQueryAdmin";
+import GrifFSAdmin from "./components/gridfs/GrifFSAdmin";
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
                 path="/admin/requestqueries"
                 component={RequestQueryAdmin}
               />
+              <Route exact path="/admin/gridfs" component={GrifFSAdmin} />
             </Switch>
           </div>
         </BrowserRouter>

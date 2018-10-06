@@ -13,6 +13,6 @@ module.exports = function(app) {
   // Body Parser Middleware
   app.use(bodyParser.urlencoded({ extended: false }));
   //Body Parser
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: "1024mb" }));
   app.use(express.json());
 };

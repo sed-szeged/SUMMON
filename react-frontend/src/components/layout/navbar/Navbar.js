@@ -43,6 +43,9 @@ class Navbar extends Component {
           <li>
             <Link to="/admin/requestqueries">Request Query</Link>
           </li>
+          <li>
+            <Link to="/admin/gridfs">GridFs</Link>
+          </li>
         </ul>
       </div>
     );

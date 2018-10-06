@@ -1,20 +1,22 @@
-version: '3'
+version: "3"
 services:
-######################
-# Setup mongo container
-######################
+  ######################
+  # Setup mongo container
+  ######################
   mongodb:
     image: "mongo"
     ports:
       - "27017:27017"
-######################
-# Setup node container
-######################
+  ######################
+  # Setup node container
+  ######################
   backend:
     build: ./node-backend
     environment:
       API_HOST: "${API_HOST}"
       APP_SERVER_PORT: "6200"
+      MONGO_CONNECTION: "mongodb://mongodb/oscd"
+      DB_NAME: "oscd"
     expose:
       - "6200"
     ports:
@@ -24,9 +26,9 @@ services:
     command: nodemon server.js
     depends_on:
       - mongodb
-######################
-# Setup react container
-######################
+  ######################
+  # Setup react container
+  ######################
   frontend:
     build: ./react-frontend
     environment:

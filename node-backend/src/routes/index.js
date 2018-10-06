@@ -15,6 +15,7 @@ const getRequestQuery = require("./requestQuery/get");
 const putRequestQuery = require("./requestQuery/put");
 
 module.exports = function(app) {
+  // "/api/gridfs/*" ALREADY IN USE
   // ROUTES
   app.use(API_BASE + "/post-admin", postAdmin);
   app.use(API_BASE + "/post-auth", postAuth);
