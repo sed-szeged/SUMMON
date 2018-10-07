@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Grid = require("gridfs-stream");
 
 const app = express();
 
@@ -17,15 +16,6 @@ mongoose
   )
   .then(() => {
     console.log("Mongodb connected...");
-    // Connecting with GridFS
-    let gfs;
-    const connection = mongoose.createConnection(process.env.MONGO_CONNECTION);
-    connection.once("open", () => {
-      // Init stream
-      gfs = Grid(connection.db, mongoose.mongo).collection(BUCKET_NAME);
-      require("./middlewares/startup/gridfs.js")(app, gfs);
-      console.log("Mongodb GridFS connected...");
-    });
   })
   .catch(err => {
     console.log("Mongodb error... ", err.stack);

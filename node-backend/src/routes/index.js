@@ -13,6 +13,7 @@ const putDataset = require("./dataset/put");
 const postRequestQuery = require("./requestQuery/post");
 const getRequestQuery = require("./requestQuery/get");
 const putRequestQuery = require("./requestQuery/put");
+const gridfs = require("./gridfsRouter");
 
 module.exports = function(app) {
   // "/api/gridfs/*" ALREADY IN USE
@@ -30,4 +31,5 @@ module.exports = function(app) {
   app.use(API_BASE + "/post-requestquery", postRequestQuery);
   app.use(API_BASE + "/get-requestquery", getRequestQuery);
   app.use(API_BASE + "/put-requestquery", putRequestQuery);
+  app.use(API_BASE + "/gridfs", gridfs);
 };
