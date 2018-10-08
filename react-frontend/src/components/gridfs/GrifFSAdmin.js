@@ -5,6 +5,7 @@ import RightSidePanel from "../layout/common/RightSidePanel";
 import ContentContainer from "../layout/common/ContentContainer";
 
 import GridFSAdd from "./GridFSAdd";
+import GridFSManage from "./GridFSManage";
 
 class GrifFSAdmin extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class GrifFSAdmin extends Component {
             </div>
           </div>
           <div className="col s12 l12">
-            {this.state.bool ? <GridFSAdd /> : <div>manage</div>}
+            {this.state.bool ? <GridFSAdd /> : <GridFSManage />}
           </div>
         </ContentContainer>
         <RightSidePanel />

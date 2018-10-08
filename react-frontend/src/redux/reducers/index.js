@@ -5,6 +5,7 @@ import datasetTypeReducer from "../reducers/datasetType/datasetTypeReducer";
 import projectsReducer from "../reducers/project/projectsReducer";
 import datasetReducer from "../reducers/dataset/datasetReducers";
 import requestQueryReducer from "../reducers/requestQuery/requestQueryReducers";
+import gridfsReducers from "../reducers/gridfs/gridFSReducers";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   datasetType: datasetTypeReducer,
   projects: projectsReducer,
   dataset: datasetReducer,
-  requestQuery: requestQueryReducer
+  requestQuery: requestQueryReducer,
+  gridfs: gridfsReducers
 });

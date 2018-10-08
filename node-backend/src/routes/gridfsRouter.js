@@ -16,6 +16,7 @@ const errorToJson = require("../models/helpers/errorToJson");
 const GridFS = require("gridfs-stream");
 const GridFsStorage = require("multer-gridfs-storage");
 const BUCKET_NAME = "gridfs_uploads";
+const FILE_COLLECTION = BUCKET_NAME + ".files";
 const MONGO_URI = process.env.MONGO_CONNECTION;
 const multer = require("multer");
 
@@ -23,9 +24,6 @@ const crypto = require("crypto");
 const path = require("path");
 
 /** Setting up storage / storage object using multer-gridfs-storage */
-
-const create_gfs = () => {};
-
 let gfs = null;
 const connection = mongoose.createConnection(MONGO_URI);
 connection.once("open", () => {
@@ -35,15 +33,6 @@ connection.once("open", () => {
   return gfs;
 });
 
-/*
-const connection = mongoose.createConnection(process.env.MONGO_CONNECTION);
-connection.once("open", () => {
-  // Init stream
-  gfs = Grid(connection.db, mongoose.mongo).collection(BUCKET_NAME);
-  //require("./middlewares/startup/gridfs.js")(app, gfs);
-  console.log("Mongodb GridFS connected...");
-});
-*/
 /** Setting up storage using multer-gridfs-storage */
 const storage = new GridFsStorage({
   url: MONGO_URI,
@@ -113,7 +102,7 @@ router.get(
       const mongoose_connection = mongoose.connection;
 
       mongoose_connection
-        .collection(BUCKET_NAME + ".files")
+        .collection(FILE_COLLECTION)
         .find({
           ["metadata.dataset"]: req.params.dataset
         })
@@ -140,7 +129,7 @@ router.get(
     } else {
       const mongoose_connection = mongoose.connection;
       const file = await mongoose_connection
-        .collection(BUCKET_NAME + ".files")
+        .collection(FILE_COLLECTION)
         .findOne({ _id: mongoose.Types.ObjectId(req.params.fileid) });
 
       if (file) {
@@ -150,7 +139,6 @@ router.get(
           "Content-disposition",
           "attachment; filename=" + file.filename
         );
-        //gfs.createReadStream({ _id: file._id }).pipe(res);
         const readstream = gfs.createReadStream({ _id: file._id });
         readstream.pipe(res);
 
@@ -165,6 +153,50 @@ router.get(
         // No file for the requested id
         res.status(404).send("File" + errorMsg.NOT_FOUND);
       }
+    }
+  })
+);
+
+// @route GET /api/gridfs/select/id/:id
+// @desc Get files for select by dataset ID
+// Public
+router.get(
+  "/select/id/:id",
+  errorMiddleware(async (req, res) => {
+    if (!Id.isValid(req.params.id)) {
+      return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
+    } else {
+      const mongoose_connection = mongoose.connection;
+      mongoose_connection
+        .collection(FILE_COLLECTION)
+        .find({
+          ["metadata.dataset"]: req.params.id
+        })
+        .toArray((err, gsf_files) => {
+          if (err) return res.status(400).send(errorMsg.INTERNAL_SERVER_ERROR);
+          if (!gsf_files || gsf_files.length === 0) {
+            return res.status(404).send("GridFS" + errorMsg.NOT_FOUND);
+          } else {
+            getGridFSArr(gsf_files)
+              .then(arr => {
+                res.send(arr);
+              })
+              .catch(err => {
+                res.status(404).send(err);
+              });
+          }
+        });
+    }
+
+    function getGridFSArr(girdfs_arr) {
+      let arr = [];
+      return new Promise((resolve, reject) => {
+        if (girdfs_arr.length === 0) reject("Datasets " + errorMsg.NOT_FOUND);
+        girdfs_arr.map(gridfs => {
+          arr.push({ value: gridfs._id, label: gridfs.metadata.name });
+        });
+        resolve(arr);
+      });
     }
   })
 );

@@ -6,8 +6,6 @@ const app = express();
 // Calls all the middlewares
 require("./middlewares/startup/index")(app);
 
-const BUCKET_NAME = "gridfs_uploads";
-
 // docker: mongodb://mongodb/oscd"
 mongoose
   .connect(

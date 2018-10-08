@@ -1,5 +1,5 @@
 import axios from "axios";
-import {} from "../types";
+import { SET_GRIDFS_SELECT, SET_SELECTED_GRIDFS } from "../types";
 import { notify } from "react-notify-toast";
 
 export const uploadFile = (file, data) => dispatch => {
@@ -40,4 +40,30 @@ export const uploadFile = (file, data) => dispatch => {
         }
       }
     });
+};
+
+export const getGridFSForSelect = id => dispatch => {
+  ///gridfs/select/id/:id
+  axios
+    .get("/gridfs/select/id/" + id)
+    .then(res => {
+      dispatch({
+        type: SET_GRIDFS_SELECT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (err.response) {
+        if (typeof err.response.data === "string") {
+          notify.show(err.response.data, "error");
+        }
+      }
+    });
+};
+
+export const setSelectedGridFS = id => dispatch => {
+  dispatch({
+    type: SET_SELECTED_GRIDFS,
+    payload: id
+  });
 };
