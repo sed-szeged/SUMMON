@@ -46,6 +46,9 @@ class Navbar extends Component {
           <li>
             <Link to="/admin/gridfs">GridFs</Link>
           </li>
+          <li>
+            <Link to="/admin/chartjs2">Chartjs 2</Link>
+          </li>
         </ul>
       </div>
     );

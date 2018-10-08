@@ -23,6 +23,7 @@ import ProjectsAdmin from "./components/projects/ProjectsAdmin";
 import DatasetsAdmin from "./components/datasets/DatasetAdmin";
 import RequestQueryAdmin from "./components/requestQuery/RequestQueryAdmin";
 import GrifFSAdmin from "./components/gridfs/GrifFSAdmin";
+import Chartjs2Admin from "./components/chartjs2/Chartjs2Admin";
 
 const main = {
   flex: "1 0 auto"
@@ -65,6 +66,7 @@ class App extends Component {
                   component={RequestQueryAdmin}
                 />
                 <Route exact path="/admin/gridfs" component={GrifFSAdmin} />
+                <Route exact path="/admin/chartjs2" component={Chartjs2Admin} />
               </Switch>
             </main>
             <Footer />

@@ -26,7 +26,7 @@ const RequestQuerySchema = new Schema({
   },
   interval: {
     type: String,
-    enum: ["minute", "hour", "4hour", "6hour", "12hour", "daily"],
+    enum: ["hour", "4hour", "6hour", "12hour", "daily"],
     required: true
   },
   queryArr: {
@@ -56,14 +56,7 @@ function validateRequestQuery(requestQuery) {
       .required(),
     execute: Joi.boolean().required(),
     downloadable: Joi.boolean().required(),
-    interval: Joi.string().valid(
-      "minute",
-      "hour",
-      "4hour",
-      "6hour",
-      "12hour",
-      "daily"
-    ),
+    interval: Joi.string().valid("hour", "4hour", "6hour", "12hour", "daily"),
     queryArr: Joi.array()
       .min(1)
       .max(10)

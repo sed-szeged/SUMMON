@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 
-import ContentContainer from "../layout/common/ContentContainer";
 import LeftSidePanel from "../layout/common/LeftSidePanel";
 import RightSidePanel from "../layout/common/RightSidePanel";
+import ContentContainer from "../layout/common/ContentContainer";
+import Chartjs2Add from "./Chartjs2Add";
+import Chartjs2Manage from "./Chartjs2Manage";
 
-import DatasetAdd from "./DatasetAdd";
-import DatasetManage from "./DatasetManage";
-
-class DatasetAdmin extends Component {
+class Chartjs2Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +18,8 @@ class DatasetAdmin extends Component {
       <div className="row">
         <LeftSidePanel />
         <ContentContainer>
-          <div className="row container">
+          {" "}
+          <div className="row">
             <div className="col s6 l6">
               <a
                 className="waves-effect waves-teal btn-flat"
@@ -40,7 +40,7 @@ class DatasetAdmin extends Component {
                 Manage
               </a>
             </div>
-            {this.state.bool ? <DatasetAdd /> : <DatasetManage />}
+            {this.state.bool ? <Chartjs2Add /> : <Chartjs2Manage />}
           </div>
         </ContentContainer>
         <RightSidePanel />
@@ -48,5 +48,4 @@ class DatasetAdmin extends Component {
     );
   }
 }
-
-export default DatasetAdmin;
+export default Chartjs2Admin;
