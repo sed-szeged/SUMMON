@@ -8,8 +8,11 @@ import { getProjectsForSelect } from "../../redux/actions/project/projectActions
 import {
   datasetForSelectByProjectId,
   getDatasetById,
-  updateDatasetById
+  updateDatasetById,
+  removeDatasetById
 } from "../../redux/actions/dataset/datasetActions";
+import { Modal, Button } from "react-materialize";
+import { notify } from "react-notify-toast";
 
 class DatasetManage extends Component {
   constructor(props) {
@@ -117,7 +120,14 @@ class DatasetManage extends Component {
       this.state.selectedDataset.value,
       updateDataset
     );
-    console.log(this.state.selectedDatasetType.value);
+  };
+
+  onRemove = e => {
+    if (this.state.selectedDataset) {
+      this.props.removeDatasetById(this.state.selectedDataset.value);
+    } else {
+      notify.show("You must select a dataset", "error");
+    }
   };
 
   render() {
@@ -205,12 +215,35 @@ class DatasetManage extends Component {
           />
         </div>
         <div className="row col l12 s12">
-          <a
-            className="waves-effect waves-light btn light-blue accent-4"
-            onClick={this.onSubmit}
-          >
-            Update
-          </a>
+          <div className="row">
+            <div children="col l12">
+              <a
+                className="waves-effect waves-light btn light-blue accent-4"
+                onClick={this.onSubmit}
+              >
+                Update
+              </a>
+            </div>
+            <div className="col l12">
+              <hr />
+              <Modal
+                header="Are you sure you want to remove the selected dataset?"
+                trigger={
+                  <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+                    Remove
+                    <i className="material-icons right">launch</i>
+                  </Button>
+                }
+              >
+                <Button
+                  onClick={this.onRemove}
+                  className="btnwaves-effect waves-light red accent-2 modal-trigger"
+                >
+                  Remove <i className="material-icons right">delete</i>
+                </Button>
+              </Modal>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -229,6 +262,7 @@ export default connect(
     getProjectsForSelect,
     datasetForSelectByProjectId,
     getDatasetById,
-    updateDatasetById
+    updateDatasetById,
+    removeDatasetById
   }
 )(DatasetManage);

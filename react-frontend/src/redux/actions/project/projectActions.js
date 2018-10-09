@@ -1,7 +1,7 @@
 import { GET_ERRORS, SET_PROJECT_SELECT, SET_PROJECT } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
-import { errorNotify } from "../../../utils/responseNotify";
+import { errorNotify, successNotify } from "../../../utils/responseNotify";
 
 export const projectAdd = projectData => dispatch => {
   axios
@@ -94,4 +94,15 @@ export const getProjectByType = type => dispatch => {
         errorNotify(err);
       });
   });
+};
+
+export const removeProjectById = id => dispatch => {
+  axios
+    .delete("/delete-project/" + id)
+    .then(res => {
+      successNotify(res);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
 };

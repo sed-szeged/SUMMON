@@ -7,11 +7,13 @@ import { notify } from "react-notify-toast";
 import {
   updateProject,
   getProject,
-  getProjectsForSelect
+  getProjectsForSelect,
+  removeProjectById
 } from "../../redux/actions/project/projectActions";
 import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 import projectTypes from "../../utils/constants/ProjectTypes";
 import isEmpty from "../../utils/isEmpty";
+import { Modal, Button } from "react-materialize";
 
 class ProjectsManage extends Component {
   constructor(props) {
@@ -46,6 +48,13 @@ class ProjectsManage extends Component {
     };
     this.props.setErrorToInitialState();
   }
+  onRemove = e => {
+    if (this.state.selectedProject) {
+      this.props.removeProjectById(this.state.selectedProject.value);
+    } else {
+      notify.show("You must select a project", "error");
+    }
+  };
 
   setProjectType = (projectTypeParam = "smartcity") => {
     this.setState({
@@ -241,12 +250,34 @@ class ProjectsManage extends Component {
             />
           </div>
         </div>
-        <a
-          className="waves-effect waves-light btn light-blue accent-4"
-          onClick={this.onSubmit}
-        >
-          Update
-        </a>
+        <div className="row">
+          <div className="col l6 s6">
+            <a
+              className="waves-effect waves-light btn light-blue accent-4"
+              onClick={this.onSubmit}
+            >
+              Update
+            </a>
+          </div>
+          <div className="col l6 s6">
+            <Modal
+              header="Are you sure you want to remove the selected project?"
+              trigger={
+                <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+                  Remove
+                  <i className="material-icons right">launch</i>
+                </Button>
+              }
+            >
+              <Button
+                onClick={this.onRemove}
+                className="btnwaves-effect waves-light red accent-2 modal-trigger"
+              >
+                Remove <i className="material-icons right">delete</i>
+              </Button>
+            </Modal>
+          </div>
+        </div>
       </div>
     );
   }
@@ -267,5 +298,11 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateProject, getProject, getProjectsForSelect, setErrorToInitialState }
+  {
+    updateProject,
+    getProject,
+    getProjectsForSelect,
+    setErrorToInitialState,
+    removeProjectById
+  }
 )(ProjectsManage);

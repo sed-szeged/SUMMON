@@ -6,7 +6,7 @@ import {
 } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
-import { errorNotify } from "../../../utils/responseNotify";
+import { errorNotify, successNotify } from "../../../utils/responseNotify";
 
 export const getDatasetById = id => dispatch => {
   axios
@@ -124,4 +124,15 @@ export const getDatasetsByDatasetTypeId = id => dispatch => {
         errorNotify(err);
       });
   });
+};
+
+export const removeDatasetById = id => dispatch => {
+  axios
+    .delete("/delete-dataset/" + id)
+    .then(res => {
+      successNotify(res);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
 };

@@ -16,7 +16,7 @@ const errorToJson = require("../models/helpers/errorToJson");
 /* GridFS */
 const GridFS = require("gridfs-stream");
 const GridFsStorage = require("multer-gridfs-storage");
-const BUCKET_NAME = "gridfs_uploads";
+const BUCKET_NAME = process.env.BUCKET_NAME; // || "gridfs_uploads";
 const FILE_COLLECTION = BUCKET_NAME + ".files";
 const MONGO_URI = process.env.MONGO_CONNECTION;
 const multer = require("multer");
