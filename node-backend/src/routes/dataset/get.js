@@ -11,6 +11,7 @@ const Dataset = require("../../models/Dataset").Dataset;
 const Project = require("../../models/Project").Project;
 const RequestQuery = require("../../models/RequestQuery").RequestQuery;
 const Chartjs2 = require("../../models/Chartjs2").Chartjs2;
+const DatasetType = require("../../models/DatasetType").DatasetType;
 
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const GRIDFS_COLLECTION = BUCKET_NAME + ".files";
@@ -115,6 +116,30 @@ router.get(
           })
           .toArray();
         return res.send({ dataset, requestQueries, chartjs2, gridfs });
+      }
+    }
+  })
+);
+
+// @route GET /api/get-dataset/list-by-datasettype/:datasettypeid
+// @desc GET datasets by datasetType ID
+// Public
+router.get(
+  "/list-by-datasettype/:datasettypeid",
+  errorMiddleware(async (req, res) => {
+    if (!Id.isValid(req.params.datasettypeid)) {
+      return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
+    } else {
+      const datasettype = await DatasetType.findOne({
+        _id: req.params.datasettypeid
+      });
+      if (!datasettype) {
+        res.status(404).send("Dataset Type " + errorMsg.NOT_FOUND);
+      } else {
+        const datasets = await Dataset.find({
+          datasetType: req.params.datasettypeid
+        }).populate("datasetType");
+        res.send(datasets);
       }
     }
   })

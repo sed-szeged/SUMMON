@@ -3,17 +3,35 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classNames from "classnames";
-import ReactSelect from "react-select";
 import { logoutAdmin } from "../../../redux/actions/auth/authActions";
+import { getDatasetTypesForSelect } from "../../../redux/actions/datasetType/datasetTypeActions";
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      datasetType: []
+    };
+  }
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutAdmin();
   };
 
+  componentDidMount() {
+    this.props.getDatasetTypesForSelect();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.datasetType) {
+      if (nextProps.datasetType.datasetTypeSelect) {
+        this.setState({ datasetType: nextProps.datasetType.datasetTypeSelect });
+      }
+    }
+  }
+
   render() {
-    const { isAuthenticated, admin } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     const authLinks = (
       <div className={classNames({ hide: !isAuthenticated })}>
@@ -110,9 +128,13 @@ class Navbar extends Component {
         </ul>
 
         <ul id="dropdown-datasettype" className="dropdown-content">
-          <li>
-            <Link to="/projects/university">Fiiiiiiiiiiiiiiiiiiiirst</Link>
-          </li>
+          {this.state.datasetType.map((dT, index) => {
+            return (
+              <li key={"dT-" + index}>
+                <Link to={"/datasettype/" + dT.value}>{dT.label}</Link>
+              </li>
+            );
+          })}
         </ul>
 
         <ul className="sidenav" id="mobile-sidebar">
@@ -137,10 +159,11 @@ Navbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  datasetType: state.datasetType
 });
 
 export default connect(
   mapStateToProps,
-  { logoutAdmin }
+  { logoutAdmin, getDatasetTypesForSelect }
 )(Navbar);

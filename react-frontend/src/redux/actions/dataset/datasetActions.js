@@ -112,3 +112,16 @@ export const getDatasetAndItsDataById = id => dispatch => {
       });
   });
 };
+
+export const getDatasetsByDatasetTypeId = id => dispatch => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/get-dataset/list-by-datasettype/" + id)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        errorNotify(err);
+      });
+  });
+};

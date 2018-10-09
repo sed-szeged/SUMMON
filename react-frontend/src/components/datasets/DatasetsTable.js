@@ -27,7 +27,16 @@ export default props => {
             )}
           </td>
           <td>
-            {dataset.datasetType.name ? dataset.datasetType.name : "none"}
+            {dataset.datasetType.name ? (
+              <Link
+                className="grey-text"
+                to={"/datasettype/" + dataset.datasetType._id}
+              >
+                {dataset.datasetType.name}
+              </Link>
+            ) : (
+              "none"
+            )}
           </td>
           <td>{dataset.created}</td>
         </tr>

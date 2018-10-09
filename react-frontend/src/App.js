@@ -16,6 +16,7 @@ import SingleDataset from "./components/datasets/SingleDataset";
 import Landing from "./components/layout/landing/LandingPage";
 import Footer from "./components/layout/footer/Footer";
 import PageNotFound from "./components/layout/common/404Page";
+import DatasetByType from "./components/datasets/DatasetByType";
 
 // ADMIN COMPONENTS
 import Login from "./components/auth/Login";
@@ -52,6 +53,11 @@ class App extends Component {
                 <Route exact path="/datasets/:id" component={Datasets} />
                 <Route exact path="/dataset/:id" component={SingleDataset} />
                 <Route exact path="/admin/register" component={Register} />
+                <Route
+                  exact
+                  path="/datasettype/:id"
+                  component={DatasetByType}
+                />
                 <Route
                   exact
                   path="/projects/:projectType"

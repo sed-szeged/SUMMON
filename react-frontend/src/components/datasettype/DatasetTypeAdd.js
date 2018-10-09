@@ -25,10 +25,7 @@ class DatasetTypeAdd extends Component {
 
   onSubmit = e => {
     const newDatasetType = {
-      name: this.state.name,
-      errors: {
-        name: ""
-      }
+      name: this.state.name
     };
     this.props.datasetTypeAdd(newDatasetType);
   };
@@ -36,30 +33,25 @@ class DatasetTypeAdd extends Component {
   render() {
     return (
       <div className="row">
-        <div className="card">
-          <h5 className="row">Add a Dataset Type</h5>
-          <div className="row">
-            <div className="col s1 l1" />
-            <div className="input-field col s12 l5">
-              <input
-                value={this.state.name}
-                onChange={this.onChange}
-                type="text"
-                id="name"
-                className={classNames("validate ", {
-                  invalid: this.state.errors.name
-                })}
-              />
-              <label htmlFor="name">Name</label>
-              <span
-                className="helper-text"
-                data-error={this.state.errors.name}
-              />
-            </div>
-            <button onClick={this.onSubmit} className="btn light-blue accent-4">
-              Add
-            </button>
+        <h5 className="row">Add a Dataset Type</h5>
+        <div className="row">
+          <div className="col s1 l1" />
+          <div className="input-field col s12 l5">
+            <input
+              value={this.state.name}
+              onChange={this.onChange}
+              type="text"
+              id="name"
+              className={classNames("validate ", {
+                invalid: this.state.errors.name
+              })}
+            />
+            <label htmlFor="name">Name</label>
+            <span className="helper-text" data-error={this.state.errors.name} />
           </div>
+          <button onClick={this.onSubmit} className="btn light-blue accent-4">
+            Add
+          </button>
         </div>
       </div>
     );

@@ -39,7 +39,6 @@ class SingleDataset extends Component {
 
   getDatasetAndItsDataById = (id = this.state.dataset_ID) => {
     this.props.getDatasetAndItsDataById(id).then(res => {
-      console.log(res);
       if (res.dataset) {
         this.setState({ dataset: res.dataset });
       }

@@ -1,6 +1,7 @@
 import { GET_ERRORS, SET_DATASETTYPE_SELECT } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
+import { successNotify, errorNotify } from "../../../utils/responseNotify";
 
 export const datasetTypeAdd = datasetTypeData => dispatch => {
   axios
@@ -37,5 +38,29 @@ export const getDatasetTypesForSelect = () => dispatch => {
       if (typeof err.response.data === "string") {
         notify.show(err.response.data, "error");
       }
+    });
+};
+
+export const removeDatasetTypeByid = id => dispatch => {
+  axios
+    .delete("/delete-datasettype/" + id)
+    .then(res => {
+      successNotify(res);
+      getDatasetTypesForSelect();
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
+};
+
+export const updateDatasetTypeById = (id, newDatasetType) => dispatch => {
+  axios
+    .put("/put-datasettype/" + id, newDatasetType)
+    .then(res => {
+      successNotify(res);
+      getDatasetTypesForSelect();
+    })
+    .catch(err => {
+      errorNotify(err);
     });
 };

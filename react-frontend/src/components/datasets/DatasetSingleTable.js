@@ -32,7 +32,14 @@ export default props => {
                 "none"
               )}
             </td>
-            <td>{datasetType.name}</td>
+            <td>
+              <Link
+                className="grey-text"
+                to={"/datasettype/" + datasetType._id}
+              >
+                {datasetType.name}
+              </Link>
+            </td>
             <td>
               <Link
                 className="grey-text"
