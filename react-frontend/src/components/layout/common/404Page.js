@@ -10,10 +10,13 @@ export default () => {
     <div className="row">
       <LeftSidePanel />
       <ContentContainer>
+        <h3>404</h3>
         <h2>
-          <strong>404 Page not found</strong>
+          <strong> Page not found</strong>
         </h2>
-        <Link to="/">Home</Link>
+        <Link className="grey-text" to="/">
+          Home
+        </Link>
       </ContentContainer>
       <RightSidePanel />
     </div>

@@ -1,6 +1,7 @@
 import { GET_ERRORS, SET_PROJECT_SELECT, SET_PROJECT } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
+import { errorNotify } from "../../../utils/responseNotify";
 
 export const projectAdd = projectData => dispatch => {
   axios
@@ -80,4 +81,17 @@ export const getProjectsForSelect = () => dispatch => {
         });
       }
     });
+};
+
+export const getProjectByType = type => dispatch => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/get-project/projecttype/" + type)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        errorNotify(err);
+      });
+  });
 };

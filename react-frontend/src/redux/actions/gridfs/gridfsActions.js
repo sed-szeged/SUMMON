@@ -1,6 +1,8 @@
 import axios from "axios";
 import { SET_GRIDFS_SELECT, SET_SELECTED_GRIDFS } from "../types";
 import { notify } from "react-notify-toast";
+import { errorNotify } from "../../../utils/responseNotify";
+import fileDownload from "js-file-download";
 
 export const uploadFile = (file, data) => dispatch => {
   const formData = new FormData();
@@ -66,4 +68,16 @@ export const setSelectedGridFS = id => dispatch => {
     type: SET_SELECTED_GRIDFS,
     payload: id
   });
+};
+
+export const downloadGridFsFile = id => dispatch => {
+  axios
+    .get("/gridfs/file/" + id, { responseType: "blob" })
+    .then(res => {
+      const filename = res.headers["content-disposition"].split("filename=")[1];
+      fileDownload(res.data, filename);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
 };

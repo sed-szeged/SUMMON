@@ -11,6 +11,8 @@ import store from "./redux/store/index";
 // COMPONENTS
 import Navbar from "./components/layout/navbar/Navbar";
 import Projects from "./components/projects/Projects";
+import Datasets from "./components/datasets/Datasets";
+import SingleDataset from "./components/datasets/SingleDataset";
 import Landing from "./components/layout/landing/LandingPage";
 import Footer from "./components/layout/footer/Footer";
 import PageNotFound from "./components/layout/common/404Page";
@@ -47,6 +49,8 @@ class App extends Component {
               <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/" component={Landing} />
+                <Route exact path="/datasets/:id" component={Datasets} />
+                <Route exact path="/dataset/:id" component={SingleDataset} />
                 <Route exact path="/admin/register" component={Register} />
                 <Route
                   exact

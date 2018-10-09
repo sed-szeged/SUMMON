@@ -17,6 +17,7 @@ services:
       APP_SERVER_PORT: "6200"
       MONGO_CONNECTION: "mongodb://mongodb/oscd"
       DB_NAME: "oscd"
+      BUCKET_NAME: "gridfs_uploads"
     expose:
       - "6200"
     ports:

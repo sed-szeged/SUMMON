@@ -3,8 +3,9 @@ const passport = require("passport");
 const Id = require("valid-objectid");
 const mongoose = require("mongoose");
 const mongodb = require("mongodb");
-
+const mongoose_connection = mongoose.connection;
 const Dataset = require("../models/Dataset").Dataset;
+const RequestQuery = require("../models/RequestQuery").RequestQuery;
 
 const errorMiddleware = require("../middlewares/error/errorMiddleWare");
 const errorMsg = require("../config/constants/errors");
@@ -166,7 +167,6 @@ router.get(
     if (!Id.isValid(req.params.id)) {
       return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
     } else {
-      const mongoose_connection = mongoose.connection;
       mongoose_connection
         .collection(FILE_COLLECTION)
         .find({
@@ -197,6 +197,54 @@ router.get(
         });
         resolve(arr);
       });
+    }
+  })
+);
+
+// @route GET /api/gridfs/collection-json/:requestqueryid
+// @desc Stream files by ID to client as a file
+// Public
+router.get(
+  "/collection-json/:requestqueryid",
+  errorMiddleware(async (req, res) => {
+    if (!Id.isValid(req.params.requestqueryid)) {
+      return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
+    } else {
+      const requestquery = await RequestQuery.findOne({
+        _id: req.params.requestqueryid
+      });
+      if (!requestquery) {
+        return res.status(404).send("Dataset " + errorMsg.NOT_FOUND);
+      } else {
+        mongoose_connection.db
+          .listCollections({ name: requestquery.collectionName })
+          .next((err, collinfo) => {
+            if (err)
+              return res.status(500).send(errorMsg.INTERNAL_SERVER_ERROR);
+            if (collinfo) {
+              res.set("content-type", "application/json");
+              res.set("accept-ranges", "bytes");
+              res.setHeader(
+                "Content-disposition",
+                "attachment; filename=" + requestquery.collectionName + ".json"
+              );
+              mongoose_connection
+                .collection(requestquery.collectionName)
+                .find({})
+                .on("data", chunk => {
+                  res.write(JSON.stringify(chunk));
+                })
+                .on("error", () => {
+                  res.end();
+                })
+                .on("close", () => {
+                  res.end();
+                });
+            } else {
+              return res.status(400).send("Collection" + errorMsg.NOT_FOUND);
+            }
+          });
+      }
     }
   })
 );

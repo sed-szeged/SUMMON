@@ -8,5 +8,6 @@ module.exports = {
   ALRADY_EXISTS: " already exists.",
   INVALID_OBJECT_ID: "Invalid Object ID",
   NOT_FOUND: " not found",
-  FORBIDDEN: "Forbidden"
+  FORBIDDEN: "Forbidden",
+  INVALID_REQUEST: "Invalid Request"
 };

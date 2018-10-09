@@ -28,7 +28,8 @@ router.post(
       location: req.body.location,
       website: req.body.website,
       description: req.body.description,
-      createdBy: req.user._id
+      createdBy: req.user._id,
+      projectType: req.body.projectType
     });
 
     const savedProject = await newProject.save();

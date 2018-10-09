@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classNames from "classnames";
+import ReactSelect from "react-select";
 import { logoutAdmin } from "../../../redux/actions/auth/authActions";
 
 class Navbar extends Component {
@@ -75,6 +76,15 @@ class Navbar extends Component {
                       <i className="material-icons right">arrow_drop_down</i>
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className="dropdown-trigger"
+                      data-target="dropdown-datasettype"
+                    >
+                      Dataset Types
+                      <i className="material-icons right">arrow_drop_down</i>
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div id="nav-1" className="col l4">
@@ -96,6 +106,12 @@ class Navbar extends Component {
           </li>
           <li>
             <Link to="/projects/university">Universities</Link>
+          </li>
+        </ul>
+
+        <ul id="dropdown-datasettype" className="dropdown-content">
+          <li>
+            <Link to="/projects/university">Fiiiiiiiiiiiiiiiiiiiirst</Link>
           </li>
         </ul>
 

@@ -56,9 +56,8 @@ class ProjectsAdd extends Component {
       country: this.state.country,
       website: this.state.website,
       description: this.state.description,
-      projectType: this.state.projectType
+      projectType: this.state.selectedProjectType.value
     };
-
     this.props.projectAdd(newProject);
   };
 

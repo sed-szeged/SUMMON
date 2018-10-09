@@ -6,6 +6,7 @@ import {
 } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
+import { errorNotify } from "../../../utils/responseNotify";
 
 export const getDatasetById = id => dispatch => {
   axios
@@ -83,5 +84,31 @@ export const setSelectedDatasetId = id => dispatch => {
   dispatch({
     type: SET_SELECTED_DATASET,
     payload: id
+  });
+};
+
+export const getProjectAndDatasetsById = id => dispatch => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/get-dataset/list/" + id)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        errorNotify(err);
+      });
+  });
+};
+
+export const getDatasetAndItsDataById = id => dispatch => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/get-dataset/list-by-dataset/" + id)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        errorNotify(err);
+      });
   });
 };

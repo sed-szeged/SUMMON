@@ -1,5 +1,7 @@
 import axios from "axios";
 import { notify } from "react-notify-toast";
+import { errorNotify } from "../../../utils/responseNotify";
+import fileDownload from "js-file-download";
 
 import {
   SET_EXECUTE,
@@ -65,6 +67,7 @@ export const postNewRequestQuery = data => dispatch => {
       if (typeof res.data === "string") return notify.show(res.data, "success");
     })
     .catch(err => {
+      errorNotify;
       if (err.response) {
         if (typeof err.response.data === "string")
           return notify.show(err.response.data, "error");
@@ -155,4 +158,16 @@ export const setSelectedRequestQueryToUndefined = data => dispatch => {
     type: SET_REQUEST_QUERY_OBJECT_TO_UNDEF,
     payload: data
   });
+};
+
+export const downloadRequestQueryCollection = id => dispatch => {
+  axios
+    .get("/gridfs/collection-json/" + id, { responseType: "blob" })
+    .then(res => {
+      const filename = res.headers["content-disposition"].split("filename=")[1];
+      fileDownload(res.data, filename);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
 };

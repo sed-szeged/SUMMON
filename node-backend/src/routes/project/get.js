@@ -4,6 +4,7 @@ const Id = require("valid-objectid");
 
 const errorMiddleware = require("../../middlewares/error/errorMiddleWare");
 const Project = require("../../models/Project").Project;
+const validateProjectType = require("../../models/Project").validateProjectType;
 
 const errorMsg = require("../../config/constants/errors");
 
@@ -43,6 +44,20 @@ router.get(
         return res.status(404).send("Project" + errorMsg.NOT_FOUND);
       }
     }
+  })
+);
+
+// @route GET /api/get-project/projecttype/:type
+// @desc GET all projects by type
+// Public
+router.get(
+  "/projecttype/:type",
+  errorMiddleware(async (req, res) => {
+    const { error } = validateProjectType({ type: req.params.type });
+    if (error) return res.status(400).send(errorMsg.INVALID_REQUEST);
+
+    const projects = await Project.find({ projectType: req.params.type });
+    return res.send(projects);
   })
 );
 

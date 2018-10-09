@@ -70,7 +70,17 @@ function validateProject(project) {
   return Joi.validate(project, JoiSchema);
 }
 
+function validateProjectType(project_Type) {
+  const JoiSchema = {
+    type: Joi.string()
+      .valid("university", "organization", "smartcity")
+      .required()
+  };
+  return Joi.validate(project_Type, JoiSchema);
+}
+
 module.exports = {
   validateProject: validateProject,
-  Project: mongoose.model("projects", ProjectSchema)
+  Project: mongoose.model("projects", ProjectSchema),
+  validateProjectType: validateProjectType
 };
