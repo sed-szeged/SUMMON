@@ -29,7 +29,7 @@ router.post(
         const newChartjs2 = new Chartjs2({
           name: req.body.name,
           description: req.body.description,
-          chartType: req.body.charType,
+          chartType: req.body.chartType,
           createdBy: req.user._id,
           jsonData: req.body.jsonData,
           dataset: dataset._id

@@ -50,6 +50,5 @@ class GrifFSAdmin extends Component {
     );
   }
 }
-const mapStateToProps = state => ({});
 
 export default GrifFSAdmin;

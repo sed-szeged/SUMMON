@@ -109,9 +109,7 @@ class ProjectsManage extends Component {
       <div className="">
         <div className="col s12 l12">
           <div className="container">
-            <h5 className="col s12 l6" className="col s12 l12">
-              Select a Project
-            </h5>
+            <h5 className="col s12 l6">Select a Project</h5>
             <div className="input-field col  s12 l12">
               <ReactSelect
                 value={this.state.selectedProject}

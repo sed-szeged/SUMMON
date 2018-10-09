@@ -24,6 +24,10 @@ class Chartjs2TypeSelect extends Component {
     }
   };
 
+  componentWillUnmount() {
+    this.props.setChartType(undefined);
+  }
+
   render() {
     return (
       <ReactSelect

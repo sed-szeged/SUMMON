@@ -7,10 +7,11 @@ export const errorNotify = err => {
         notify.show(err.response.data, "error");
       }
       if (typeof err.response.data === "object") {
-        if (typeof err.response.data[0] === "object") {
-          notify.show(JSON.stringify(err.response.data[0]), "error");
-        } else {
+        if (typeof err.response.data[0] === "string") {
           notify.show(err.response.data[0], "error");
+        } else {
+          const msg = Object.keys(err.response.data)[0];
+          notify.show(JSON.stringify(err.response.data[msg]), "error");
         }
       }
     }

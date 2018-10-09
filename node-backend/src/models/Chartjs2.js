@@ -32,7 +32,6 @@ function validateChartjs2(chartjs2Type) {
     name: Joi.string()
       .min(3)
       .max(64)
-      .alphanum()
       .required(),
     description: Joi.string().max(500),
     chartType: Joi.string()

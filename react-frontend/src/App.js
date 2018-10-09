@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Notifications from "react-notify-toast";
 
 import "./App.css";
-import indexCSS from "./index.css";
 
 // REDUX
 import { Provider } from "react-redux";
@@ -14,6 +13,7 @@ import Navbar from "./components/layout/navbar/Navbar";
 import Projects from "./components/projects/Projects";
 import Landing from "./components/layout/landing/LandingPage";
 import Footer from "./components/layout/footer/Footer";
+import PageNotFound from "./components/layout/common/404Page";
 
 // ADMIN COMPONENTS
 import Login from "./components/auth/Login";
@@ -67,6 +67,7 @@ class App extends Component {
                 />
                 <Route exact path="/admin/gridfs" component={GrifFSAdmin} />
                 <Route exact path="/admin/chartjs2" component={Chartjs2Admin} />
+                <Route path="/" component={PageNotFound} />
               </Switch>
             </main>
             <Footer />

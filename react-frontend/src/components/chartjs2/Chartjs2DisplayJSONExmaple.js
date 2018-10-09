@@ -1,9 +1,5 @@
 import React from "react";
 import JSONInput from "react-json-editor-ajrm";
-import {
-  doughnutData,
-  lineData
-} from "../../utils/constants/chartjs2DefaultData";
 
 export default props => {
   switch (props.chartType) {
