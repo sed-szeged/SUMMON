@@ -15,6 +15,7 @@ const successMsg = require("../../config/constants/success");
 // Private - Super User
 router.post(
   "/",
+  passport.authenticate("jwt", { session: false }),
   errorMiddleware(async (req, res) => {
     const { error } = validateDatasetType(req.body);
     if (error) return res.status(400).send(errorToJson(error));

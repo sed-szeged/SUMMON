@@ -19,6 +19,7 @@ import PageNotFound from "./components/layout/common/404Page";
 import DatasetByType from "./components/datasets/DatasetByType";
 
 // ADMIN COMPONENTS
+import PrivateRoute from "./components/layout/common/PrivateRoute";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import DatasetTypeAdmin from "./components/datasettype/DatasetTypeAdmin";
@@ -63,20 +64,36 @@ class App extends Component {
                   path="/projects/:projectType"
                   component={Projects}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/admin/datasettype"
                   component={DatasetTypeAdmin}
                 />
-                <Route exact path="/admin/projects" component={ProjectsAdmin} />
-                <Route exact path="/admin/datasets" component={DatasetsAdmin} />
-                <Route
+                <PrivateRoute
+                  exact
+                  path="/admin/projects"
+                  component={ProjectsAdmin}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/datasets"
+                  component={DatasetsAdmin}
+                />
+                <PrivateRoute
                   exact
                   path="/admin/requestqueries"
                   component={RequestQueryAdmin}
                 />
-                <Route exact path="/admin/gridfs" component={GrifFSAdmin} />
-                <Route exact path="/admin/chartjs2" component={Chartjs2Admin} />
+                <PrivateRoute
+                  exact
+                  path="/admin/gridfs"
+                  component={GrifFSAdmin}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/chartjs2"
+                  component={Chartjs2Admin}
+                />
                 <Route path="/" component={PageNotFound} />
               </Switch>
             </main>

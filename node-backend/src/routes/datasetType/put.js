@@ -17,6 +17,7 @@ const successMsg = require("../../config/constants/success");
 // Private - Super User
 router.put(
   "/:id",
+  passport.authenticate("jwt", { session: false }),
   errorMiddleware(async (req, res) => {
     if (!Id.isValid(req.params.id)) {
       return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
