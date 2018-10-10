@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { notify } from "react-notify-toast";
 
 import DatasetSelect from "../../components/layout/common/DatasetSelect";
 import GridFSSelect from "./GridFSSelect";
 import { Modal, Button } from "react-materialize";
+
+import { removeFile } from "../../redux/actions/gridfs/gridfsActions";
 
 class GridFSManage extends Component {
   constructor(props) {
@@ -26,6 +29,14 @@ class GridFSManage extends Component {
     }
   }
 
+  onRemove = e => {
+    if (this.state.gridfs === "") {
+      notify.show("You must select a file", "error");
+    } else {
+      this.props.removeFile(this.state.gridfs);
+    }
+  };
+
   render() {
     return (
       <div>
@@ -43,7 +54,8 @@ class GridFSManage extends Component {
                 <div className="row col l12 s12 center offset-s5 ">
                   <hr />
                   <Modal
-                    header="Are you sure you want to remove the file and its records from the database?"
+                    id="modal"
+                    header="Are you sure you want to remove the file and its data from the database?"
                     trigger={
                       <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
                         Remove
@@ -51,7 +63,11 @@ class GridFSManage extends Component {
                       </Button>
                     }
                   >
-                    <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+                    <Button
+                      onClick={this.onRemove}
+                      href="#modal"
+                      className="btnwaves-effect waves-light red accent-2 modal-trigger"
+                    >
                       Remove <i className="material-icons right">delete</i>
                     </Button>
                   </Modal>
@@ -72,7 +88,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {},
+  { removeFile },
   null,
   { withRef: true }
 )(GridFSManage);

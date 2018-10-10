@@ -91,6 +91,49 @@ router.post(
   })
 );
 
+// @route GET /api/gridfs/files/:id
+// @desc Remove a file from gridfs
+// Private
+router.delete(
+  "/file/:id",
+  passport.authenticate("jwt", { session: false }),
+  errorMiddleware(async (req, res) => {
+    if (!Id.isValid(req.params.id)) {
+      return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
+    } else {
+      mongoose_connection
+        .collection(FILE_COLLECTION)
+        .find({
+          _id: mongoose.Types.ObjectId(req.params.id)
+        })
+        .toArray((err, gfs_file) => {
+          if (err) return res.status(500).send(errorMsg.INTERNAL_SERVER_ERROR);
+
+          if (!gfs_file || gfs_file.length === 0) {
+            return res.status(404).send(errorMsg.NOT_FOUND);
+          } else {
+            if (!req.user.isSuperUser) {
+              return res
+                .status(403)
+                .send(
+                  errorMsg.FORBIDDEN + " Super Users can remove gridfs files"
+                );
+            } else {
+              gfs.remove(
+                { _id: req.params.id, root: BUCKET_NAME },
+                (err, gridStore) => {
+                  if (err)
+                    return res.status(500).send(errorMsg.INTERNAL_SERVER_ERROR);
+                  else return res.send("Gridfs file " + successMsg.WAS_REMOVED);
+                }
+              );
+            }
+          }
+        });
+    }
+  })
+);
+
 // @route GET /api/gridfs/:dataset
 // @desc get file informations
 // Public

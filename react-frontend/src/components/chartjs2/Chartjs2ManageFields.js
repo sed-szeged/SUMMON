@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Modal, Button } from "react-materialize";
+import { removeChartById } from "../../redux/actions/chartjs2/chartjs2Actions";
+import { notify } from "react-notify-toast";
 
 class Chartjs2ManageFields extends Component {
   constructor(props) {
@@ -34,31 +37,35 @@ class Chartjs2ManageFields extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  onRemove = e => {
+    if (this.state.chart._id === "") {
+      notify.show("Select a chart", "error");
+    } else {
+      this.props.removeChartById(this.state.chart._id);
+    }
+  };
+
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="input-field col s12 l6">
-            <input
-              value={this.state.name}
-              onChange={this.onChange}
-              id="name"
-              type="text"
-            />
-            <label className="active" htmlFor="name">
-              Name
-            </label>
-          </div>
-          <div className="input-field col s12 l6">
-            <textarea
-              value={this.state.description}
-              onChange={this.onChange}
-              id="description"
-              className="materialize-textarea"
-            />
-            <label htmlFor="description">Description</label>
-          </div>
-        </div>
+      <div className="row">
+        <Modal
+          id="modal"
+          header="Are you sure you want to remove the file and its records from the database?"
+          trigger={
+            <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+              Remove
+              <i className="material-icons right">launch</i>
+            </Button>
+          }
+        >
+          <Button
+            href="#modal"
+            onClick={this.onRemove}
+            className="btnwaves-effect waves-light red accent-2 modal-trigger"
+          >
+            Remove <i className="material-icons right">delete</i>
+          </Button>
+        </Modal>
       </div>
     );
   }
@@ -70,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { removeChartById }
 )(Chartjs2ManageFields);

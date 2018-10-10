@@ -1,6 +1,6 @@
 import axios from "axios";
 import { notify } from "react-notify-toast";
-import { errorNotify } from "../../../utils/responseNotify";
+import { errorNotify, successNotify } from "../../../utils/responseNotify";
 import fileDownload from "js-file-download";
 
 import {
@@ -166,6 +166,17 @@ export const downloadRequestQueryCollection = id => dispatch => {
     .then(res => {
       const filename = res.headers["content-disposition"].split("filename=")[1];
       fileDownload(res.data, filename);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
+};
+
+export const removeRequestQueryById = id => dispatch => {
+  axios
+    .delete("/delete-requestquery/" + id)
+    .then(res => {
+      successNotify(res);
     })
     .catch(err => {
       errorNotify(err);

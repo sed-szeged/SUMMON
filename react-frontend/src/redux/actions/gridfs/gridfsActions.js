@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SET_GRIDFS_SELECT, SET_SELECTED_GRIDFS } from "../types";
 import { notify } from "react-notify-toast";
-import { errorNotify } from "../../../utils/responseNotify";
+import { errorNotify, successNotify } from "../../../utils/responseNotify";
 import fileDownload from "js-file-download";
 
 export const uploadFile = (file, data) => dispatch => {
@@ -76,6 +76,17 @@ export const downloadGridFsFile = id => dispatch => {
     .then(res => {
       const filename = res.headers["content-disposition"].split("filename=")[1];
       fileDownload(res.data, filename);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
+};
+
+export const removeFile = id => dispatch => {
+  axios
+    .delete("/gridfs/file/" + id)
+    .then(res => {
+      successNotify(res);
     })
     .catch(err => {
       errorNotify(err);

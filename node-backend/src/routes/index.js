@@ -17,9 +17,11 @@ const deleteDataset = require("./dataset/delete");
 const postRequestQuery = require("./requestQuery/post");
 const getRequestQuery = require("./requestQuery/get");
 const putRequestQuery = require("./requestQuery/put");
+const deleteRequestQuery = require("./requestQuery/delete");
 const postChartjs2 = require("./chartjs2/post");
 const putChartjs2 = require("./chartjs2/put");
 const getChartjs2 = require("./chartjs2/get");
+const deleteChartjs2 = require("./chartjs2/delete");
 const gridfs = require("./gridfsRouter");
 
 module.exports = function(app) {
@@ -42,8 +44,10 @@ module.exports = function(app) {
   app.use(API_BASE + "/post-requestquery", postRequestQuery);
   app.use(API_BASE + "/get-requestquery", getRequestQuery);
   app.use(API_BASE + "/put-requestquery", putRequestQuery);
+  app.use(API_BASE + "/delete-requestquery", deleteRequestQuery);
   app.use(API_BASE + "/post-chartjs2", postChartjs2);
   app.use(API_BASE + "/put-chartjs2", putChartjs2);
   app.use(API_BASE + "/get-chartjs2", getChartjs2);
+  app.use(API_BASE + "/delete-chartjs2", deleteChartjs2);
   app.use(API_BASE + "/gridfs", gridfs);
 };

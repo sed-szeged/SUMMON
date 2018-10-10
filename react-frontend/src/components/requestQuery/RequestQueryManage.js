@@ -9,7 +9,8 @@ import RequestQuerySelect from "./RequestQuerySelect";
 import {
   getQueryUriData,
   updateRequestQueryById,
-  setSelectedRequestQueryToUndefined
+  setSelectedRequestQueryToUndefined,
+  removeRequestQueryById
 } from "../../redux/actions/requestQuery/requestQueryActions";
 import RequestQueryIntervalSelect from "./RequestQueryIntervalSelect";
 import RequestQuerySwitches from "./RequestQuerySwitches";
@@ -20,7 +21,7 @@ class RequestQueryManage extends Component {
     super(props);
     this.state = {
       dataset: "",
-      requestQuery: {}, // Object From Get
+      requestQuery: null, // Object From Get
       name: "",
       queryURI: "",
       json: {},
@@ -109,6 +110,14 @@ class RequestQueryManage extends Component {
     this.props.setSelectedRequestQueryToUndefined(undefined);
   }
 
+  onClick = e => {
+    if (this.state.requestQuery) {
+      this.props.removeRequestQueryById(this.state.requestQuery._id);
+    } else {
+      notify.show("You must select a Request Query", "error");
+    }
+  };
+
   render() {
     return (
       <div>
@@ -186,14 +195,38 @@ class RequestQueryManage extends Component {
             />
           </div>
         </div>
-        <button
-          className="waves-effect waves-light btn light-blue accent-4"
-          onClick={() => {
-            this.RequestQueryElement.current.getWrappedInstance().setJson();
-          }}
-        >
-          Update
-        </button>
+        <div className="row">
+          <div className="col l6 s6">
+            <button
+              className="waves-effect waves-light btn light-blue accent-4"
+              onClick={() => {
+                this.RequestQueryElement.current.getWrappedInstance().setJson();
+              }}
+            >
+              Update
+            </button>
+          </div>
+          <div className="col l6  s6">
+            <Modal
+              id="modal"
+              header="Are you sure you want to remove the file and its records from the database?"
+              trigger={
+                <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+                  Remove
+                  <i className="material-icons right">launch</i>
+                </Button>
+              }
+            >
+              <Button
+                href="#modal"
+                className="btnwaves-effect waves-light red accent-2 modal-trigger"
+                onClick={this.onClick}
+              >
+                Remove <i className="material-icons right">delete</i>
+              </Button>
+            </Modal>
+          </div>
+        </div>
       </div>
     );
   }
@@ -209,7 +242,8 @@ export default connect(
   {
     getQueryUriData,
     updateRequestQueryById,
-    setSelectedRequestQueryToUndefined
+    setSelectedRequestQueryToUndefined,
+    removeRequestQueryById
   },
   null,
   { withRef: true }

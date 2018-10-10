@@ -60,3 +60,14 @@ export const getChartJsById = id => dispatch => {
       errorNotify(err);
     });
 };
+
+export const removeChartById = id => dispatch => {
+  axios
+    .delete("/delete-chartjs2/" + id)
+    .then(res => {
+      successNotify(res);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
+};
