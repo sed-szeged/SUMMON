@@ -2,7 +2,11 @@ const router = require("express").Router();
 const passport = require("passport");
 const Id = require("valid-objectid");
 const mongoose = require("mongoose");
-const mongodb = require("mongodb");
+/* GridFS packages */
+const GridFS = require("gridfs-stream");
+const GridFsStorage = require("multer-gridfs-storage");
+const multer = require("multer");
+
 const mongoose_connection = mongoose.connection;
 const Dataset = require("../models/Dataset").Dataset;
 const RequestQuery = require("../models/RequestQuery").RequestQuery;
@@ -14,12 +18,9 @@ const validateGridFS = require("../models/GridFS").validateGridFS;
 const errorToJson = require("../models/helpers/errorToJson");
 
 /* GridFS */
-const GridFS = require("gridfs-stream");
-const GridFsStorage = require("multer-gridfs-storage");
 const BUCKET_NAME = process.env.BUCKET_NAME; // || "gridfs_uploads";
 const FILE_COLLECTION = BUCKET_NAME + ".files";
 const MONGO_URI = process.env.MONGO_CONNECTION;
-const multer = require("multer");
 
 const crypto = require("crypto");
 const path = require("path");

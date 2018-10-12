@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { notify } from "react-notify-toast";
+import { Modal, Button } from "react-materialize";
 import {
   updateProject,
   getProject,
@@ -13,7 +14,6 @@ import {
 import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 import projectTypes from "../../utils/constants/ProjectTypes";
 import isEmpty from "../../utils/isEmpty";
-import { Modal, Button } from "react-materialize";
 
 class ProjectsManage extends Component {
   constructor(props) {
