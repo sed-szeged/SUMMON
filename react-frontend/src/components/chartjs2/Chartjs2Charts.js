@@ -13,8 +13,30 @@ class Chartjs2Charts extends Component {
     super(props);
     this.state = {
       jsonData: null,
-      jsonViewData: {}
+      jsonViewData: {},
+      options: {}
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.jsonData) {
+      this.setState({ jsonData: nextProps.jsonData });
+    }
+    if (nextProps.noXAxis) {
+      this.setState({
+        options: {
+          scales: {
+            xAxes: [
+              {
+                ticks: {
+                  display: false //this will remove only the label
+                }
+              }
+            ]
+          }
+        }
+      });
+    }
   }
 
   displayCharts = chartType => {
@@ -23,19 +45,25 @@ class Chartjs2Charts extends Component {
         if (isEmpty(this.props.jsonData)) {
           return <Line data={lineData} />;
         } else {
-          return <Line data={this.props.jsonData} />;
+          return (
+            <Line data={this.props.jsonData} options={this.state.options} />
+          );
         }
       case "bar":
         if (isEmpty(this.props.jsonData)) {
           return <Bar data={barData} />;
         } else {
-          return <Bar data={this.props.jsonData} />;
+          return (
+            <Bar data={this.props.jsonData} options={this.state.options} />
+          );
         }
       case "doughnut":
         if (isEmpty(this.props.jsonData)) {
           return <Doughnut data={doughnutData} />;
         } else {
-          return <Doughnut data={this.props.jsonData} />;
+          return (
+            <Doughnut data={this.props.jsonData} options={this.state.options} />
+          );
         }
       default:
         return <p>Select a valid Chart Type</p>;

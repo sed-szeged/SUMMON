@@ -27,7 +27,7 @@ export default props => {
   });
 
   if (!props.chartjs2 || props.chartjs2.length === 0) {
-    return <h4>No Charts to Display</h4>;
+    return "";
   } else {
     return <div>{displayCharts}</div>;
   }

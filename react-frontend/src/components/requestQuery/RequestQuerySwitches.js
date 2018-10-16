@@ -17,12 +17,6 @@ class RequestQuerySwitches extends Component {
     this.props.setExecute(this.props.execute || false);
     this.props.setDownloadable(this.props.downloadable || false);
   }
-
-  componentDidUpdate() {
-    console.log(this.state.execute);
-    console.log(this.state.downloadable);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.execute) this.setState({ execute: nextProps.execute });
     if (nextProps.downloadable)

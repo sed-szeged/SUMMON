@@ -21,7 +21,7 @@ export default props => {
   }
 
   if (!props.gridfs || props.gridfs.length === 0) {
-    return <h5>No Data for download</h5>;
+    return "";
   } else {
     return (
       <div>

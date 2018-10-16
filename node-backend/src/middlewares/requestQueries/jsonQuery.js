@@ -2,15 +2,15 @@ const jsonQuery = require("json-query");
 const insertQueryData = require("./insertQueryData");
 
 function getData(queryArr, json) {
-  let dataArr = [];
+  let dataObj = {};
   return new Promise((resolve, reject) => {
     queryArr.forEach(singleQuery => {
       try {
         const queryValue = jsonQuery(singleQuery.query, { data: json });
-        dataArr.push({ [singleQuery.queryKey]: queryValue.value });
+        dataObj[singleQuery.queryKey] = queryValue.value;
       } catch (e) {}
     });
-    resolve(dataArr);
+    resolve(dataObj);
   });
 }
 

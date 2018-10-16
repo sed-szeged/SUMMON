@@ -11,12 +11,12 @@ const ProjectSchema = new Schema({
   },
   country: {
     type: String,
-    minlength: 3,
+    minlength: 2,
     maxlength: 75
   },
   location: {
     type: String,
-    minlength: 3,
+    minlength: 2,
     maxlength: 128
   },
   website: {
@@ -27,7 +27,7 @@ const ProjectSchema = new Schema({
   description: {
     type: String,
     minlength: 10,
-    maxlength: 255
+    maxlength: 1020
   },
   created: {
     type: Date,
@@ -45,15 +45,13 @@ function validateProject(project) {
     name: Joi.string()
       .min(3)
       .max(75)
-      .alphanum()
       .required(),
     country: Joi.string()
-      .min(3)
+      .min(2)
       .max(75)
-      .alphanum()
       .required(),
     location: Joi.string()
-      .min(3)
+      .min(2)
       .max(128)
       .required(),
     website: Joi.string()
@@ -62,7 +60,7 @@ function validateProject(project) {
       .uri(),
     description: Joi.string()
       .min(10)
-      .max(255),
+      .max(1020),
     projectType: Joi.string()
       .valid("university", "organization", "smartcity")
       .required()

@@ -45,7 +45,7 @@ export default props => {
   }
 
   if (!props.datasets || props.datasets.length === 0) {
-    return <h5>No Datasets to Display</h5>;
+    return "";
   } else {
     return (
       <table>

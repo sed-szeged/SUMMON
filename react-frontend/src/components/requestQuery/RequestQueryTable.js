@@ -1,46 +1,46 @@
 import React from "react";
 import RequestQueryDownloadButton from "./RequestQueryDownloadButton";
+import RequestQueryTableHead from "./rfc/RequestQueryTableHead";
+import RequestQueryTableChartInterface from "./rcc/RequestQueryTableChartInterface";
 
 export default props => {
   if (!props.requestQuery || props.requestQuery.length === 0) {
-    return <h4>No Request Query to Display</h4>;
+    return "";
   } else {
     let displayRequestQueryTable = props.requestQuery.map((rq, index) => {
       return (
-        <tr key={"rq-" + index}>
-          <td>{rq.name}</td>
-          <td>{rq.interval}</td>
-          <td>
-            {" "}
-            <a
-              className="grey-text"
-              href={rq.queryURI}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              API
-            </a>
-          </td>
-          <td>{rq.created}</td>
-          <td>
-            <RequestQueryDownloadButton id={rq._id} />
-          </td>
-        </tr>
+        <div key={"rq-" + index}>
+          <RequestQueryTableHead>
+            <tr key={"rq-data-" + index}>
+              <td>{rq.name}</td>
+              <td>{rq.interval}</td>
+              <td>
+                {" "}
+                <a
+                  className="grey-text"
+                  href={rq.queryURI}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  API
+                </a>
+              </td>
+              <td>{rq.created}</td>
+              <td>
+                <RequestQueryDownloadButton id={rq._id} />
+              </td>
+            </tr>
+          </RequestQueryTableHead>
+
+          <RequestQueryTableChartInterface
+            requestQuery={rq}
+            id={rq._id}
+            created={rq.created}
+          />
+          <hr />
+        </div>
       );
     });
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Interval</th>
-            <th>REST API</th>
-            <th>Created</th>
-            <th>Download</th>
-          </tr>
-        </thead>
-        <tbody>{displayRequestQueryTable}</tbody>
-      </table>
-    );
+    return <div>{displayRequestQueryTable}</div>;
   }
 };

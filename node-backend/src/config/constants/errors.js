@@ -9,5 +9,6 @@ module.exports = {
   INVALID_OBJECT_ID: "Invalid Object ID",
   NOT_FOUND: " not found",
   FORBIDDEN: "Forbidden",
-  INVALID_REQUEST: "Invalid Request"
+  INVALID_REQUEST: "Invalid Request",
+  INVALID_DATE_PARAMETER: "Invalid date parameter"
 };

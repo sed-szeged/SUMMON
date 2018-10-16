@@ -1,4 +1,6 @@
 const Joi = require("joi");
+const Extension = require("joi-date-extensions");
+const DateJoi = Joi.extend(Extension);
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -48,6 +50,7 @@ const RequestQuerySchema = new Schema({
 function validateRequestQuery(requestQuery) {
   const RequestQuerySchema = {
     name: Joi.string()
+      .alphanum()
       .min(3)
       .max(63),
     queryURI: Joi.string()
@@ -101,6 +104,13 @@ function validateURI(uri) {
   return Joi.validate(uri, URISchema);
 }
 
+function validateDate(date) {
+  const DateSchema = {
+    date: DateJoi.date().format("YYYY-MM-DD")
+  };
+  return Joi.validate(date, DateSchema);
+}
+
 function makeCollectionName(name) {
   return "REQUEST_QUERY__" + name.split(" ").join("_") + Date.now();
 }
@@ -110,5 +120,6 @@ module.exports = {
   validateRequestQuery: validateRequestQuery,
   RequestQuery: mongoose.model("requestqueries", RequestQuerySchema),
   makeCollectionName: makeCollectionName,
-  validateUpdateRequestQuery: validateUpdateRequestQuery
+  validateUpdateRequestQuery: validateUpdateRequestQuery,
+  validateDate: validateDate
 };

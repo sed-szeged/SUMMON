@@ -82,9 +82,7 @@ class SingleDataset extends Component {
       return (
         <div className="row">
           <LeftSidePanel />
-          <ContentContainer>
-            <h4>No dataset for the provided ID</h4>
-          </ContentContainer>
+          <ContentContainer>{""}</ContentContainer>
           <RightSidePanel />
         </div>
       );

@@ -78,16 +78,16 @@ class RequestQueryManage extends Component {
   }
 
   onSubmit = () => {
-    const updateRequestQuery = {
-      name: this.state.name,
-      queryURI: this.state.queryURI,
-      execute: this.state.execute,
-      downloadable: this.state.downloadable,
-      interval: this.state.interval,
-      queryArr: this.state.updatedQueryArr,
-      id: this.state.requestQuery._id
-    };
     if (this.state.updatedQueryArr) {
+      const updateRequestQuery = {
+        name: this.state.name,
+        queryURI: this.state.queryURI,
+        execute: this.state.execute,
+        downloadable: this.state.downloadable,
+        interval: this.state.interval,
+        queryArr: this.state.updatedQueryArr,
+        id: this.state.requestQuery._id
+      };
       this.props.updateRequestQueryById(updateRequestQuery);
     } else {
       notify.show("You must select a Request Query", "error");

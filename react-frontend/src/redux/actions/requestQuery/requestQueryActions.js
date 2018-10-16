@@ -182,3 +182,16 @@ export const removeRequestQueryById = id => dispatch => {
       errorNotify(err);
     });
 };
+
+export const getDataForRequestQueryChart = (id, date, limit) => dispatch => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/get-requestquery/" + id + "/" + date + "/" + limit)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        errorNotify(err);
+      });
+  });
+};

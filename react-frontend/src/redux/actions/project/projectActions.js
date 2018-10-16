@@ -12,6 +12,7 @@ export const projectAdd = projectData => dispatch => {
       }
     })
     .catch(err => {
+      console.log(err.response.data);
       if (typeof err.response.data === "string") {
         notify.show(err.response.data, "error");
       } else if (typeof err.response.data === "object") {
