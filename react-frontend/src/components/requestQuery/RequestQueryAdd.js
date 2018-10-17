@@ -100,9 +100,13 @@ class RequestQueryAdd extends Component {
             <i className="material-icons right">send</i>
           </button>
           <Modal
+            id="add-modal"
             header="Modal Header"
             trigger={
-              <Button className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4 modal-trigger">
+              <Button
+                href="#add-modal"
+                className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4 modal-trigger"
+              >
                 Toggle
                 <i className="material-icons right">launch</i>
               </Button>

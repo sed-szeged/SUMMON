@@ -195,3 +195,21 @@ export const getDataForRequestQueryChart = (id, date, limit) => dispatch => {
       });
   });
 };
+
+export const downloadRequestQueryByIdStartEnd = (
+  id,
+  start,
+  end
+) => dispatch => {
+  axios
+    .get("/get-requestquery/download/" + id + "/" + start + "/" + end, {
+      responseType: "blob"
+    })
+    .then(res => {
+      const filename = res.headers["content-disposition"].split("filename=")[1];
+      fileDownload(res.data, filename);
+    })
+    .catch(err => {
+      errorNotify(err);
+    });
+};

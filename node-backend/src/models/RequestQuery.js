@@ -111,6 +111,14 @@ function validateDate(date) {
   return Joi.validate(date, DateSchema);
 }
 
+function validateStartEndDate(date) {
+  const DateSchema = {
+    start: DateJoi.date().format("YYYY-MM-DD"),
+    end: DateJoi.date().format("YYYY-MM-DD")
+  };
+  return Joi.validate(date, DateSchema);
+}
+
 function makeCollectionName(name) {
   return "REQUEST_QUERY__" + name.split(" ").join("_") + Date.now();
 }
@@ -121,5 +129,6 @@ module.exports = {
   RequestQuery: mongoose.model("requestqueries", RequestQuerySchema),
   makeCollectionName: makeCollectionName,
   validateUpdateRequestQuery: validateUpdateRequestQuery,
-  validateDate: validateDate
+  validateDate: validateDate,
+  validateStartEndDate: validateStartEndDate
 };

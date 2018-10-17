@@ -28,7 +28,7 @@ class RequestQueryDownloadButton extends Component {
   render() {
     return (
       <button onClick={this.onClick} className="btn light-blue accent-4">
-        Download
+        Download All
       </button>
     );
   }

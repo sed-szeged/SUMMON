@@ -134,6 +134,9 @@ class RequestQueryTableChartInterface extends Component {
         this.setState({ jsonData: res.data });
         checkForValidKey(this.state.propertyArr, res).then(ress => {
           this.setState({ propertyArr: ress });
+          if (this.state.chartType === "") {
+            this.setState({ chartType: "line" });
+          }
         });
       });
   };

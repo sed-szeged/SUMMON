@@ -1,7 +1,8 @@
 import React from "react";
-import RequestQueryDownloadButton from "./RequestQueryDownloadButton";
 import RequestQueryTableHead from "./rfc/RequestQueryTableHead";
 import RequestQueryTableChartInterface from "./rcc/RequestQueryTableChartInterface";
+import { Modal, Button } from "react-materialize";
+import RequestQueryDownloadModalBody from "./rcc/RequestQueryDownloadModalBody";
 
 export default props => {
   if (!props.requestQuery || props.requestQuery.length === 0) {
@@ -27,7 +28,25 @@ export default props => {
               </td>
               <td>{rq.created}</td>
               <td>
-                <RequestQueryDownloadButton id={rq._id} />
+                <Modal
+                  className="col l12"
+                  id={"rq-modal-" + index}
+                  header={"Download data from " + rq.name}
+                  trigger={
+                    <Button
+                      href={"rq-modal-" + index}
+                      className="btn waves-effect waves-light light-blue accent-4 modal-trigger"
+                    >
+                      Download
+                      <i className="material-icons right">launch</i>
+                    </Button>
+                  }
+                >
+                  <RequestQueryDownloadModalBody
+                    id={rq._id}
+                    created={rq.created}
+                  />
+                </Modal>
               </td>
             </tr>
           </RequestQueryTableHead>

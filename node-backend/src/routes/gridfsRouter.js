@@ -276,12 +276,16 @@ router.get(
                 .collection(requestquery.collectionName)
                 .find({})
                 .on("data", chunk => {
+                  chunk.date = new Date(chunk.date).toISOString();
                   res.write(JSON.stringify(chunk));
                 })
                 .on("error", () => {
                   res.end();
                 })
                 .on("close", () => {
+                  res.end();
+                })
+                .on("end", () => {
                   res.end();
                 });
             } else {
