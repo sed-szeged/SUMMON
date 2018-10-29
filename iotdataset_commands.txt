@@ -17,3 +17,6 @@ Docker:
 
 	FREE UP PORT
 		$sudo fuser -l <port>/tcp	
+
+	DUMPING MONGO DB
+	docker run --link <mongo container name>:mongo --net <mongodb network> -v </path/to/dump>:/backup mongo /bin/bash -c 'mongodump --out /backup --host mongo:27017'

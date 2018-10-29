@@ -9,7 +9,8 @@ import {
   updateProject,
   getProject,
   getProjectsForSelect,
-  removeProjectById
+  removeProjectById,
+  setProjectUndefined
 } from "../../redux/actions/project/projectActions";
 import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 import projectTypes from "../../utils/constants/ProjectTypes";
@@ -107,6 +108,10 @@ class ProjectsManage extends Component {
       this.props.updateProject(this.state.project._id, updateProject);
     }
   };
+
+  componentWillUnmount() {
+    this.props.setProjectUndefined();
+  }
 
   handleSelectOnChangeProject = e => {
     this.props.getProject(e.value);
@@ -303,6 +308,7 @@ export default connect(
     getProject,
     getProjectsForSelect,
     setErrorToInitialState,
-    removeProjectById
+    removeProjectById,
+    setProjectUndefined
   }
 )(ProjectsManage);

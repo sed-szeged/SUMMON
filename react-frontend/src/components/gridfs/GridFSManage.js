@@ -6,7 +6,10 @@ import DatasetSelect from "../../components/layout/common/DatasetSelect";
 import GridFSSelect from "./GridFSSelect";
 import { Modal, Button } from "react-materialize";
 
-import { removeFile } from "../../redux/actions/gridfs/gridfsActions";
+import {
+  removeFile,
+  setGridfsNull
+} from "../../redux/actions/gridfs/gridfsActions";
 
 class GridFSManage extends Component {
   constructor(props) {
@@ -27,6 +30,10 @@ class GridFSManage extends Component {
         this.setState({ gridfs: nextProps.gridfs.selected });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.setGridfsNull();
   }
 
   onRemove = e => {
@@ -88,7 +95,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { removeFile },
+  { removeFile, setGridfsNull },
   null,
   { withRef: true }
 )(GridFSManage);

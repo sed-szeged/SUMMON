@@ -12,7 +12,8 @@ import {
   SET_REQUEST_QUERY_SELECT,
   SET_SELECTED_REQUEST_QUERY,
   SET_REQUEST_QUERY,
-  SET_REQUEST_QUERY_OBJECT_TO_UNDEF
+  SET_REQUEST_QUERY_OBJECT_TO_UNDEF,
+  SET_REQUEST_QUERY_NULL
 } from "../types";
 
 export const setExecute = bool => dispatch => {
@@ -212,4 +213,8 @@ export const downloadRequestQueryByIdStartEnd = (
     .catch(err => {
       errorNotify(err);
     });
+};
+
+export const setRequestQueryNull = () => dispatch => {
+  dispatch({ type: SET_REQUEST_QUERY_NULL });
 };

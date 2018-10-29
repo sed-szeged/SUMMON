@@ -10,7 +10,8 @@ import ReactJson from "react-json-view";
 import { Modal, Button } from "react-materialize";
 import {
   getQueryUriData,
-  postNewRequestQuery
+  postNewRequestQuery,
+  setRequestQueryNull
 } from "../../redux/actions/requestQuery/requestQueryActions";
 
 class RequestQueryAdd extends Component {
@@ -62,6 +63,10 @@ class RequestQueryAdd extends Component {
       if (nextProps.dataset.selected)
         this.setState({ dataset: nextProps.dataset.selected });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.setRequestQueryNull();
   }
 
   getQueryUriData = e => {
@@ -156,7 +161,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getQueryUriData, postNewRequestQuery },
+  { getQueryUriData, postNewRequestQuery, setRequestQueryNull },
   null,
   { withRef: true }
 )(RequestQueryAdd);

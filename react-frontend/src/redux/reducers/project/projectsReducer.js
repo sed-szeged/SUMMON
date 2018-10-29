@@ -1,4 +1,8 @@
-import { SET_PROJECT, SET_PROJECT_SELECT } from "../../actions/types";
+import {
+  SET_PROJECT,
+  SET_PROJECT_SELECT,
+  SET_PROJECT_NULL
+} from "../../actions/types";
 
 const initialState = {
   select: []
@@ -16,6 +20,8 @@ export default function(state = initialState, action) {
         ...state,
         select: action.payload
       };
+    case SET_PROJECT_NULL:
+      return null;
     default:
       return state;
   }

@@ -6,7 +6,10 @@ import { notify } from "react-notify-toast";
 import ReactSelect from "react-select";
 import projectTypes from "../../utils/constants/ProjectTypes";
 
-import { projectAdd } from "../../redux/actions/project/projectActions";
+import {
+  projectAdd,
+  setProjectUndefined
+} from "../../redux/actions/project/projectActions";
 import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 
 class ProjectsAdd extends Component {
@@ -48,6 +51,10 @@ class ProjectsAdd extends Component {
   handleSelectOnChange = e => {
     this.setState({ selectedProjectType: e });
   };
+
+  componentWillUnmount() {
+    this.props.setProjectUndefined();
+  }
 
   onSubmit = e => {
     const newProject = {
@@ -189,5 +196,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { projectAdd, setErrorToInitialState }
+  { projectAdd, setErrorToInitialState, setProjectUndefined }
 )(ProjectsAdd);

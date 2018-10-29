@@ -1,5 +1,9 @@
 import axios from "axios";
-import { SET_GRIDFS_SELECT, SET_SELECTED_GRIDFS } from "../types";
+import {
+  SET_GRIDFS_SELECT,
+  SET_SELECTED_GRIDFS,
+  SET_GRIDFS_NULL
+} from "../types";
 import { notify } from "react-notify-toast";
 import { errorNotify, successNotify } from "../../../utils/responseNotify";
 import fileDownload from "js-file-download";
@@ -91,4 +95,10 @@ export const removeFile = id => dispatch => {
     .catch(err => {
       errorNotify(err);
     });
+};
+
+export const setGridfsNull = () => dispatch => {
+  dispatch({
+    type: SET_GRIDFS_NULL
+  });
 };

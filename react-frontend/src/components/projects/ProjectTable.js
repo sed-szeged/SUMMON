@@ -5,7 +5,11 @@ export default props => {
   const displayProjectsBody = props.projects.map((project, index) => {
     return (
       <tr key={index}>
-        <td>{project.name}</td>
+        <td>
+          <Link className="grey-text" to={"/datasets/" + project._id}>
+            {project.name}
+          </Link>
+        </td>
         <td>
           {" "}
           <a

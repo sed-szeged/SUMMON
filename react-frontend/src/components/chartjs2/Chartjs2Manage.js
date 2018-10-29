@@ -5,6 +5,7 @@ import DatasetSelect from "../layout/common/DatasetSelect";
 import Chartjs2Select from "./Chartjs2Select";
 import { getChartJsById } from "../../redux/actions/chartjs2/chartjs2Actions";
 import Chartjs2ManageFields from "./Chartjs2ManageFields";
+import { setChartjs2Null } from "../../redux/actions/chartjs2/chartjs2Actions";
 
 class Chartjs2Manage extends Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class Chartjs2Manage extends Component {
       description: "",
       jsonData: null
     };
+  }
+
+  componentWillUnmount() {
+    this.props.setChartjs2Null();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,5 +66,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getChartJsById }
+  { getChartJsById, setChartjs2Null }
 )(Chartjs2Manage);

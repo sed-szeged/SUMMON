@@ -40,7 +40,9 @@ class DatasetAdmin extends Component {
                 Manage
               </a>
             </div>
-            {this.state.bool ? <DatasetAdd /> : <DatasetManage />}
+            <div className="row">
+              {this.state.bool ? <DatasetAdd /> : <DatasetManage />}
+            </div>
           </div>
         </ContentContainer>
         <RightSidePanel />

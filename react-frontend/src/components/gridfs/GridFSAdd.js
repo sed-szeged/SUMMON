@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { notify } from "react-notify-toast";
 
 import DatasetSelect from "../layout/common/DatasetSelect";
-import { uploadFile } from "../../redux/actions/gridfs/gridfsActions";
+import {
+  uploadFile,
+  setGridfsNull
+} from "../../redux/actions/gridfs/gridfsActions";
 
 class GridFSAdd extends Component {
   constructor(props) {
@@ -38,6 +41,10 @@ class GridFSAdd extends Component {
       }
     }
   };
+
+  componentWillUnmount() {
+    this.props.setGridfsNull();
+  }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -111,7 +118,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { uploadFile },
+  { uploadFile, setGridfsNull },
   null,
   { withRef: true }
 )(GridFSAdd);

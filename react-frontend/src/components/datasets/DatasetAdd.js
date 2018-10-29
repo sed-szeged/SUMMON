@@ -6,7 +6,10 @@ import PropTypes from "prop-types";
 import { getDatasetTypesForSelect } from "../../redux/actions/datasetType/datasetTypeActions";
 import { setErrorToInitialState } from "../../redux/actions/error/errorActions";
 import { getProjectsForSelect } from "../../redux/actions/project/projectActions";
-import { datasetAdd } from "../../redux/actions/dataset/datasetActions";
+import {
+  datasetAdd,
+  setDatasetNull
+} from "../../redux/actions/dataset/datasetActions";
 
 class DatasetAdd extends Component {
   constructor(props) {
@@ -32,6 +35,10 @@ class DatasetAdd extends Component {
   componentWillMount() {
     this.props.getDatasetTypesForSelect();
     this.props.getProjectsForSelect();
+  }
+
+  componentWillUnMount() {
+    this.props.setDatasetNull();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -173,6 +180,7 @@ export default connect(
     getDatasetTypesForSelect,
     setErrorToInitialState,
     getProjectsForSelect,
-    datasetAdd
+    datasetAdd,
+    setDatasetNull
   }
 )(DatasetAdd);

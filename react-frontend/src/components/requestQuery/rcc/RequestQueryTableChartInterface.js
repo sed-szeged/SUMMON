@@ -54,7 +54,7 @@ class RequestQueryTableChartInterface extends Component {
 
   quantityOnChange = e => {
     const quantity = e.target.value;
-    if (0 < quantity && quantity <= 500) {
+    if (0 < quantity && quantity <= 200) {
       this.setState({ quantity: quantity });
     }
   };

@@ -1,4 +1,8 @@
-import { SET_GRIDFS_SELECT, SET_SELECTED_GRIDFS } from "../../actions/types";
+import {
+  SET_GRIDFS_SELECT,
+  SET_SELECTED_GRIDFS,
+  SET_GRIDFS_NULL
+} from "../../actions/types";
 
 const initialState = {
   select: []
@@ -16,6 +20,8 @@ export default function(state = initialState, action) {
         ...state,
         selected: action.payload
       };
+    case SET_GRIDFS_NULL:
+      return null;
     default:
       return {
         ...state

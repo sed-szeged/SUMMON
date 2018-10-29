@@ -60,6 +60,7 @@ class RequestQueryDownloadModalBody extends Component {
           <RequestQueryDownloadButton id={this.state.id} />
         </div>
         <div className="row col l12">
+          <p>Download the dataset between dates: </p>
           <div className="col l6">
             <input
               value={this.state.startDate}

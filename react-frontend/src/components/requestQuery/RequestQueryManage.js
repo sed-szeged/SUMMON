@@ -10,7 +10,8 @@ import {
   getQueryUriData,
   updateRequestQueryById,
   setSelectedRequestQueryToUndefined,
-  removeRequestQueryById
+  removeRequestQueryById,
+  setRequestQueryNull
 } from "../../redux/actions/requestQuery/requestQueryActions";
 import RequestQueryIntervalSelect from "./RequestQueryIntervalSelect";
 import RequestQuerySwitches from "./RequestQuerySwitches";
@@ -108,6 +109,7 @@ class RequestQueryManage extends Component {
 
   componentWillUnmount() {
     this.props.setSelectedRequestQueryToUndefined(undefined);
+    this.props.setRequestQueryNull();
   }
 
   onClick = e => {
@@ -243,7 +245,8 @@ export default connect(
     getQueryUriData,
     updateRequestQueryById,
     setSelectedRequestQueryToUndefined,
-    removeRequestQueryById
+    removeRequestQueryById,
+    setRequestQueryNull
   },
   null,
   { withRef: true }

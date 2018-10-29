@@ -2,7 +2,8 @@ import {
   SET_CHART_TYPE,
   SET_CHARTS_SELECT,
   SET_SELECTED_CHARTJS,
-  SET_CHARTJS_DATA
+  SET_CHARTJS_DATA,
+  SET_CHARTJS2_NULL
 } from "../../actions/types";
 
 const initialState = {};
@@ -29,6 +30,8 @@ export default function(state = initialState, action) {
         ...state,
         chart: action.payload
       };
+    case SET_CHARTJS2_NULL:
+      return null;
     default:
       return {
         ...state

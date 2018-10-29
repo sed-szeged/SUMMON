@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import DatasetSelect from "../layout/common/DatasetSelect";
 import Chartjs2Fields from "./Chartjs2Fields";
+import { setChartjs2Null } from "../../redux/actions/chartjs2/chartjs2Actions";
 
 class Chartjs2Add extends Component {
   constructor(props) {
@@ -19,6 +20,10 @@ class Chartjs2Add extends Component {
           this.setState({ dataset: nextProps.dataset.selected });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.setChartjs2Null();
   }
 
   render() {
@@ -40,5 +45,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { setChartjs2Null }
 )(Chartjs2Add);

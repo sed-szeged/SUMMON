@@ -70,8 +70,10 @@ router.get(
     if (typeof limit !== "number") {
       limit = 10;
     } else {
-      if (limit < 1 || 300 < limit) {
-        limit = 300;
+      if (limit < 1) {
+        limit = 10;
+      } else if (200 < limit) {
+        limit = 200;
       } else {
         limit = Math.round(limit);
       }

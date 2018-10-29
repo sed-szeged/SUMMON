@@ -6,7 +6,8 @@ import {
   SET_URI_DATA,
   SET_REQUEST_QUERY_SELECT,
   SET_REQUEST_QUERY,
-  SET_REQUEST_QUERY_OBJECT_TO_UNDEF
+  SET_REQUEST_QUERY_OBJECT_TO_UNDEF,
+  SET_REQUEST_QUERY_NULL
 } from "../../actions/types";
 
 const initialState = {};
@@ -53,6 +54,8 @@ export default function(state = initialState, action) {
         ...state,
         selected: action.payload
       };
+    case SET_REQUEST_QUERY_NULL:
+      return null;
     default:
       return state;
   }

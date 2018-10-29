@@ -2,7 +2,8 @@ import {
   GET_ERRORS,
   SET_DATASET_SELECT,
   SET_DATASET,
-  SET_SELECTED_DATASET
+  SET_SELECTED_DATASET,
+  SET_DATASET_NULL
 } from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
@@ -135,4 +136,8 @@ export const removeDatasetById = id => dispatch => {
     .catch(err => {
       errorNotify(err);
     });
+};
+
+export const setDatasetNull = () => dispatch => {
+  dispatch({ type: SET_DATASET_NULL });
 };

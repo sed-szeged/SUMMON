@@ -3,7 +3,8 @@ import {
   SET_CHART_TYPE,
   SET_CHARTS_SELECT,
   SET_SELECTED_CHARTJS,
-  SET_CHARTJS_DATA
+  SET_CHARTJS_DATA,
+  SET_CHARTJS2_NULL
 } from "../types";
 import { errorNotify, successNotify } from "../../../utils/responseNotify";
 
@@ -70,4 +71,8 @@ export const removeChartById = id => dispatch => {
     .catch(err => {
       errorNotify(err);
     });
+};
+
+export const setChartjs2Null = () => dispatch => {
+  dispatch({ type: SET_CHARTJS2_NULL });
 };

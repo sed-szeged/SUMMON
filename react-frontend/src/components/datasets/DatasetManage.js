@@ -9,7 +9,8 @@ import {
   datasetForSelectByProjectId,
   getDatasetById,
   updateDatasetById,
-  removeDatasetById
+  removeDatasetById,
+  setDatasetNull
 } from "../../redux/actions/dataset/datasetActions";
 import { Modal, Button } from "react-materialize";
 import { notify } from "react-notify-toast";
@@ -52,6 +53,10 @@ class DatasetManage extends Component {
           datasetTypeSelect: this.props.datasetType.datasetTypeSelect
         });
     }
+  }
+
+  componentWillUnMount() {
+    this.props.setDatasetNull();
   }
 
   projectSelectOnChange = e => {
@@ -263,6 +268,7 @@ export default connect(
     datasetForSelectByProjectId,
     getDatasetById,
     updateDatasetById,
-    removeDatasetById
+    removeDatasetById,
+    setDatasetNull
   }
 )(DatasetManage);

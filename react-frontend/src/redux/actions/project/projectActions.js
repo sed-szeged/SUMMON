@@ -1,4 +1,9 @@
-import { GET_ERRORS, SET_PROJECT_SELECT, SET_PROJECT } from "../types";
+import {
+  GET_ERRORS,
+  SET_PROJECT_SELECT,
+  SET_PROJECT,
+  SET_PROJECT_NULL
+} from "../types";
 import { notify } from "react-notify-toast";
 import axios from "axios";
 import { errorNotify, successNotify } from "../../../utils/responseNotify";
@@ -12,7 +17,6 @@ export const projectAdd = projectData => dispatch => {
       }
     })
     .catch(err => {
-      console.log(err.response.data);
       if (typeof err.response.data === "string") {
         notify.show(err.response.data, "error");
       } else if (typeof err.response.data === "object") {
@@ -106,4 +110,10 @@ export const removeProjectById = id => dispatch => {
     .catch(err => {
       errorNotify(err);
     });
+};
+
+export const setProjectUndefined = () => dispatch => {
+  dispatch({
+    type: SET_PROJECT_NULL
+  });
 };
