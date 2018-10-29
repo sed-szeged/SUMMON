@@ -13,5 +13,4 @@ export default props => {
     default:
       return <h5>Chart type wasn't recognized</h5>;
   }
-  return <div />;
 };

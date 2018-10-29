@@ -6,7 +6,7 @@ import indexCSS from "../../../index.css";
 import dom from "../../../images/dom.jpg";
 import dom1 from "../../../images/dom1.jpg";
 import dom2 from "../../../images/dom2.jpg";
-import unsplash from "../../../images/unsplash.jpg";
+import unsplash from "../../../images/particle.png";
 
 class LandingPage extends Component {
   render() {

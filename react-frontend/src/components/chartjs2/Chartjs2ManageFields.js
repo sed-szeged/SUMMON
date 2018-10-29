@@ -61,7 +61,7 @@ class Chartjs2ManageFields extends Component {
           <Button
             href="#modal"
             onClick={this.onRemove}
-            className="btnwaves-effect waves-light red accent-2 modal-trigger"
+            className="btnwaves-effect waves-light red accent-2"
           >
             Remove <i className="material-icons right">delete</i>
           </Button>

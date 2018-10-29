@@ -82,7 +82,7 @@ class RequestQueryAdd extends Component {
   render() {
     return (
       <div>
-        <div className="card">Add a Request Query</div>
+        <h5>Add a Request Query</h5>
         <DatasetSelect />
         <div className="row">
           <div className="input-field col s12 l7">

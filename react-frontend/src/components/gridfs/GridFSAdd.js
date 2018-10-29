@@ -57,6 +57,7 @@ class GridFSAdd extends Component {
   render() {
     return (
       <div>
+        <h5>Add a File (GridFs Store)</h5>
         <DatasetSelect />
         <div className="row">
           <div>

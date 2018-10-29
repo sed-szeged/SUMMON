@@ -123,7 +123,7 @@ class RequestQueryManage extends Component {
   render() {
     return (
       <div>
-        <div className="card">Select and Manage a Request Query</div>
+        <h5>Select and Manage a Request Query</h5>
         <DatasetSelect />
         <div className="row col l12 s12">
           {this.state.dataset ? (

@@ -21,13 +21,14 @@ const barChartDatasets = propertyArr => {
     if (Array.isArray(propertyArr)) {
       propertyArr.map((item, index) => {
         if (item.validData) {
-          arr.push({
+          return arr.push({
             data: item.dataArr,
             label: item.propertyKey,
             backgroundColor: item.color,
             fill: true
           });
         }
+        return arr;
       });
       return arr;
     }
@@ -52,6 +53,7 @@ const lineChartDatasets = propertyArr => {
             }
           });
         }
+        return arr;
       });
       return arr;
     }

@@ -44,6 +44,7 @@ class Chartjs2Manage extends Component {
   render() {
     return (
       <div>
+        <h5>Select and Manage a Chart</h5>
         <div className="row">
           <DatasetSelect />
         </div>

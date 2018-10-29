@@ -21,6 +21,7 @@ class RequestQueryTableChartInterface extends Component {
       requestQuery: this.props.requestQuery,
       minDate: "",
       selectedDate: "",
+      endDate: "",
       quantity: 10,
       reactSelectOptions: [],
       propertyArr: []
@@ -31,7 +32,8 @@ class RequestQueryTableChartInterface extends Component {
       if (this.props.requestQuery.created) {
         this.setState({
           minDate: this.props.requestQuery.created.split("T", 1)[0],
-          selectedDate: this.props.requestQuery.created.split("T", 1)[0]
+          selectedDate: this.props.requestQuery.created.split("T", 1)[0],
+          endDate: this.props.requestQuery.created.split("T", 1)[0]
         });
       }
       if (this.props.requestQuery.queryArr) {
@@ -49,6 +51,19 @@ class RequestQueryTableChartInterface extends Component {
     const selectedDate = new Date(e.target.value);
     if (minDate <= selectedDate && selectedDate <= today) {
       this.setState({ selectedDate: e.target.value });
+    }
+    const endDate = new Date(this.state.endDate);
+    if (endDate < selectedDate) {
+      this.setState({ endDate: e.target.value });
+    }
+  };
+
+  endDateOnChange = e => {
+    const minDate = new Date(this.state.minDate);
+    const selectedDate = new Date(this.state.selectedDate);
+    const selectedEndDate = new Date(e.target.value);
+    if (minDate < selectedEndDate && selectedDate < selectedEndDate) {
+      this.setState({ endDate: e.target.value });
     }
   };
 
@@ -128,6 +143,7 @@ class RequestQueryTableChartInterface extends Component {
       .getDataForRequestQueryChart(
         this.state.id,
         this.state.selectedDate,
+        this.state.endDate,
         this.state.quantity
       )
       .then(res => {
@@ -170,7 +186,7 @@ class RequestQueryTableChartInterface extends Component {
         </div>
         {/******************* CONTROLS *******************/}
         <div className="row">
-          <div className="col l3">
+          <div className="col l3 s12">
             <ReactSelect
               value={null}
               options={this.state.reactSelectOptions}
@@ -178,7 +194,7 @@ class RequestQueryTableChartInterface extends Component {
               placeholder="Add property"
             />
           </div>
-          <div className="col l3">
+          <div className="col l3 s12">
             <input
               value={this.state.selectedDate}
               onChange={this.dateOnChange}
@@ -187,7 +203,16 @@ class RequestQueryTableChartInterface extends Component {
             />
             <span className="helper-text">Starting Date</span>
           </div>
-          <div className="input-field col l3">
+          <div className="col l3 s12">
+            <input
+              value={this.state.endDate}
+              onChange={this.endDateOnChange}
+              type="date"
+              id="endDate"
+            />
+            <span className="helper-text">Starting Date</span>
+          </div>
+          <div className="input-field col l2 s12">
             <input
               value={this.state.quantity}
               onChange={this.quantityOnChange}
@@ -197,7 +222,7 @@ class RequestQueryTableChartInterface extends Component {
             />
             <span className="helper-text">Number of data</span>
           </div>
-          <div className="col l3">
+          <div className="col l1 s12">
             <a
               onClick={this.loadData}
               className="teal white-text lighten-2 waves-effect waves-teal btn-flat"

@@ -108,7 +108,10 @@ class RequestQueryElements extends Component {
     let isError = false;
     return new Promise(resolve => {
       this.state.errorQueryArr.map(element => {
-        if (element !== "") isError = true;
+        if (element !== "") {
+          isError = true;
+          return isError;
+        } else return null;
       });
       resolve(isError);
     });

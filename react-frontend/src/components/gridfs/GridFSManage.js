@@ -47,6 +47,7 @@ class GridFSManage extends Component {
   render() {
     return (
       <div>
+        <h5>Select and Manage a GridFS</h5>
         <div>
           <DatasetSelect />
           {this.state.dataset ? (

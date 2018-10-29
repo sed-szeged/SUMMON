@@ -106,7 +106,8 @@ function validateURI(uri) {
 
 function validateDate(date) {
   const DateSchema = {
-    date: DateJoi.date().format("YYYY-MM-DD")
+    date: DateJoi.date().format("YYYY-MM-DD"),
+    endDate: DateJoi.date().format("YYYY-MM-DD")
   };
   return Joi.validate(date, DateSchema);
 }
