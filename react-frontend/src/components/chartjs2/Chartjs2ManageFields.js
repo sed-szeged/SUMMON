@@ -52,7 +52,7 @@ class Chartjs2ManageFields extends Component {
           id="modal"
           header="Are you sure you want to remove the file and its records from the database?"
           trigger={
-            <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+            <Button className="btnwaves-effect waves-light red accent-2">
               Remove
               <i className="material-icons right">launch</i>
             </Button>

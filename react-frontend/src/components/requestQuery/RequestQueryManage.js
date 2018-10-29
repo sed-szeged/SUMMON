@@ -158,9 +158,13 @@ class RequestQueryManage extends Component {
                 <i className="material-icons right">send</i>
               </button>
               <Modal
+                id="modal"
                 header="Modal Header"
                 trigger={
-                  <Button className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4 modal-trigger">
+                  <Button
+                    href="#modal"
+                    className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4"
+                  >
                     Toggle
                     <i className="material-icons right">launch</i>
                   </Button>
@@ -210,17 +214,17 @@ class RequestQueryManage extends Component {
           </div>
           <div className="col l6  s6">
             <Modal
-              id="modal"
+              id="modalRemove"
               header="Are you sure you want to remove the file and its records from the database?"
               trigger={
-                <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
+                <Button className="btnwaves-effect waves-light red accent-2">
                   Remove
                   <i className="material-icons right">launch</i>
                 </Button>
               }
             >
               <Button
-                href="#modal"
+                href="#modalRemove"
                 className="btnwaves-effect waves-light red accent-2 modal-trigger"
                 onClick={this.onClick}
               >

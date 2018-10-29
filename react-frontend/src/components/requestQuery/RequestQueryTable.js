@@ -35,7 +35,7 @@ export default props => {
                   trigger={
                     <Button
                       href={"rq-modal-" + index}
-                      className="btn waves-effect waves-light light-blue accent-4 modal-trigger"
+                      className="btn waves-effect waves-light light-blue accent-4"
                     >
                       Download
                       <i className="material-icons right">launch</i>

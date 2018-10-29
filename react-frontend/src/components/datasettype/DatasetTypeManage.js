@@ -85,6 +85,7 @@ class DatasetTypeManage extends Component {
           </div>
           <div className="col l6 s6">
             <Modal
+              id="modal"
               header="Are you sure you want to remove the dataset type selected?"
               trigger={
                 <Button className="btnwaves-effect waves-light red accent-2 modal-trigger">
@@ -94,8 +95,9 @@ class DatasetTypeManage extends Component {
               }
             >
               <Button
+                href="#modal"
                 onClick={this.onRemove}
-                className="btnwaves-effect waves-light red accent-2 modal-trigger"
+                className="btnwaves-effect waves-light red accent-2"
               >
                 Remove <i className="material-icons right">delete</i>
               </Button>

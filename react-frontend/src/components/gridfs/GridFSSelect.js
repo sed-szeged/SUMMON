@@ -19,7 +19,7 @@ class GridFSSelect extends Component {
     };
   }
   componentDidMount() {
-    this.invokeGridFSSelect(this.props.selectedDataset);
+    this.props.getGridFSForSelect(this.props.selectedDataset);
   }
 
   componentWillReceiveProps(nextProps) {

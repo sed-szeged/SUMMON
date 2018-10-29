@@ -110,7 +110,7 @@ class RequestQueryAdd extends Component {
             trigger={
               <Button
                 href="#add-modal"
-                className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4 modal-trigger"
+                className="btn waves-effect waves-light offset-l1 col s12 l2 light-blue accent-4"
               >
                 Toggle
                 <i className="material-icons right">launch</i>
