@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 const errorMiddleware = require("../../middlewares/error/errorMiddleWare");
 const errorToJson = require("../../models/helpers/errorToJson");
@@ -18,7 +19,9 @@ const validateAdmin = require("../../models/Admin").validateAdmin;
 // Private - SuperUser
 router.post(
   "/",
+  passport.authenticate("jwt", { session: false }),
   errorMiddleware(async (req, res) => {
+    if (!req.user.isSuperUser) return res.status(400).send(errorMsg.FORBIDDEN);
     const { error } = validateAdmin(req.body);
     if (error) {
       return res.status(400).send(errorToJson(error));

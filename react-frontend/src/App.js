@@ -53,7 +53,6 @@ class App extends Component {
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/datasets/:id" component={Datasets} />
                 <Route exact path="/dataset/:id" component={SingleDataset} />
-                <Route exact path="/admin/register" component={Register} />
                 <Route
                   exact
                   path="/datasettype/:id"
@@ -63,6 +62,11 @@ class App extends Component {
                   exact
                   path="/projects/:projectType"
                   component={Projects}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/register"
+                  component={Register}
                 />
                 <PrivateRoute
                   exact

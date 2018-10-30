@@ -4,6 +4,7 @@ services:
   # Setup mongo container
   ######################
   mongodb:
+    restart: always
     image: "mongo"
     ports:
       - "27017:27017"
@@ -12,11 +13,11 @@ services:
   ######################
   backend:
     build: ./node-backend
+    restart: always
     environment:
-      API_HOST: "${API_HOST}"
       APP_SERVER_PORT: "6200"
-      MONGO_CONNECTION: "mongodb://mongodb/oscd"
-      DB_NAME: "oscd"
+      MONGO_CONNECTION: "mongodb://mongodb/iotdataset"
+      DB_NAME: "iotdataset"
       BUCKET_NAME: "gridfs_uploads"
     expose:
       - "6200"
@@ -32,6 +33,7 @@ services:
   ######################
   frontend:
     build: ./react-frontend
+    restart: always
     environment:
       - REACT_APP_PORT="3000"
     expose:

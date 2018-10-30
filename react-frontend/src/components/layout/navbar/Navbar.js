@@ -63,7 +63,7 @@ class Navbar extends Component {
             <Link to="/admin/requestqueries">Request Query</Link>
           </li>
           <li>
-            <Link to="/admin/gridfs">GridFs</Link>
+            <Link to="/admin/gridfs">File</Link>
           </li>
           <li>
             <Link to="/admin/chartjs2">Chartjs 2</Link>
