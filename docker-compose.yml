@@ -19,6 +19,7 @@ services:
       MONGO_CONNECTION: "mongodb://mongodb/iotdataset"
       DB_NAME: "iotdataset"
       BUCKET_NAME: "gridfs_uploads"
+      SECRET: "yoursecretkey"
     expose:
       - "6200"
     ports:

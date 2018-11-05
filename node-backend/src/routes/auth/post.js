@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const errorMiddleware = require("../../middlewares/error/errorMiddleWare");
-const jwtSecretKey = require("../../config/keys/keys").jwtSecretKey;
+const jwtSecretKey = process.env.SECRET;
 const errorToJson = require("../../models/helpers/errorToJson");
 const errorMsg = require("../../config/constants/errors");
 const successMsg = require("../../config/constants/success");
