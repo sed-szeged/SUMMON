@@ -55,77 +55,6 @@ router.get(
   })
 );
 
-// @route GET /api/get-requestquery/:id/:date/:limit
-// @desc GET array of reqeust query by id and query it's data by date and number of limit
-// Public
-router.get(
-  "/:id/:date/:endDate/:limit",
-  errorMiddleware(async (req, res) => {
-    let date, limit;
-    try {
-      limit = parseInt(req.params.limit);
-    } catch (e) {
-      return res.status(400).send(errorMsg.INVALID_REQUEST);
-    }
-    if (typeof limit !== "number") {
-      limit = 10;
-    } else {
-      if (limit < 1) {
-        limit = 10;
-      } else if (200 < limit) {
-        limit = 200;
-      } else {
-        limit = Math.round(limit);
-      }
-    }
-    const { error } = validateDate({
-      date: req.params.date,
-      endDate: req.params.endDate
-    });
-    if (error) return req.status(400).send(errorMsg.INVALID_DATE_PARAMETER);
-    else date = new Date(req.params.date);
-
-    if (!Id.isValid(req.params.id)) {
-      return req.status(400).send(errorMsg.INVALID_OBJECT_ID);
-    } else {
-      const rq = await RequestQuery.findOne({ _id: req.params.id });
-      if (rq) {
-        const n = Date.now();
-        const now = new Date(n);
-        const rq_date = new Date(rq.created);
-        if (now.valueOf < date.valueOf) date = rq_date;
-        if (date.valueOf < rq_date.valueOf) date = rq_date;
-        /** Making end date 1 day later */
-        const permDate = new Date(req.params.endDate);
-        permDate.setDate(permDate.getDate() + 1);
-        const oneDayMore = makeYYYY_MM_DDFormat(permDate);
-        mongoose_connection
-          .collection(rq.collectionName)
-          .find({
-            date: {
-              $gte: Date.parse(req.params.date),
-              $lt: Date.parse(oneDayMore)
-            }
-          })
-          .limit(limit)
-          .toArray((err, data) => {
-            if (err)
-              return res.status(400).send(errorMsg.INTERNAL_SERVER_ERROR);
-            if (data.length === 0)
-              return res.status(404).send(errorMsg.NOT_FOUND);
-            else res.send({ data: data });
-          });
-      } else {
-        return res.status(404).send(errorMsg.INVALID_OBJECT_ID);
-      }
-    }
-  })
-);
-function makeYYYY_MM_DDFormat(date) {
-  endDate = date.toISOString().split("T", 1)[0];
-  return endDate;
-}
-
 // @route GET /api/get-requestquery/download/:id/:start/:end
 // @desc Download a json file betweend start and end date
 // Public
@@ -188,5 +117,76 @@ router.get(
     }
   })
 );
+
+// @route GET /api/get-requestquery/:id/:date/:limit
+// @desc GET array of reqeust query by id and query it's data by date and number of limit
+// Public
+router.get(
+  "/:id/:date/:endDate/:limit",
+  errorMiddleware(async (req, res) => {
+    let date, limit;
+    try {
+      limit = parseInt(req.params.limit);
+    } catch (e) {
+      return res.status(400).send(errorMsg.INVALID_REQUEST);
+    }
+    if (typeof limit !== "number") {
+      limit = 10;
+    } else {
+      if (limit < 1) {
+        limit = 10;
+      } else if (200 < limit) {
+        limit = 200;
+      } else {
+        limit = Math.round(limit);
+      }
+    }
+    const { error } = validateDate({
+      date: req.params.date,
+      endDate: req.params.endDate
+    });
+    if (error) return res.status(400).send(errorMsg.INVALID_DATE_PARAMETER);
+    else date = new Date(req.params.date);
+
+    if (!Id.isValid(req.params.id)) {
+      return res.status(400).send(errorMsg.INVALID_OBJECT_ID);
+    } else {
+      const rq = await RequestQuery.findOne({ _id: req.params.id });
+      if (rq) {
+        const n = Date.now();
+        const now = new Date(n);
+        const rq_date = new Date(rq.created);
+        if (now.valueOf < date.valueOf) date = rq_date;
+        if (date.valueOf < rq_date.valueOf) date = rq_date;
+        /** Making end date 1 day later */
+        const permDate = new Date(req.params.endDate);
+        permDate.setDate(permDate.getDate() + 1);
+        const oneDayMore = makeYYYY_MM_DDFormat(permDate);
+        mongoose_connection
+          .collection(rq.collectionName)
+          .find({
+            date: {
+              $gte: Date.parse(req.params.date),
+              $lt: Date.parse(oneDayMore)
+            }
+          })
+          .limit(limit)
+          .toArray((err, data) => {
+            if (err)
+              return res.status(400).send(errorMsg.INTERNAL_SERVER_ERROR);
+            if (data.length === 0)
+              return res.status(404).send(errorMsg.NOT_FOUND);
+            else res.send({ data: data });
+          });
+      } else {
+        return res.status(404).send(errorMsg.INVALID_OBJECT_ID);
+      }
+    }
+  })
+);
+function makeYYYY_MM_DDFormat(date) {
+  endDate = date.toISOString().split("T", 1)[0];
+  return endDate;
+}
 
 module.exports = router;
