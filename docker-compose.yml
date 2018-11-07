@@ -22,10 +22,10 @@ services:
       SECRET: "yoursecretkey"
     expose:
       - "6200"
+    #volumes:
+    #  - ./react-backend:/usr/src/app
     ports:
       - "6200:6200"
-    volumes:
-      - ./node-backend:/usr/src/app
     command: npm start
     depends_on:
       - mongodb
@@ -41,8 +41,8 @@ services:
       - "3000"
     ports:
       - "3000:3000"
-    volumes:
-      - ./react-frontend:/usr/src/app
+    #volumes:
+    #  - ./react-frontend:/usr/src/app
     links:
       - backend
     depends_on:
