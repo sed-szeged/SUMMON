@@ -1,10 +1,11 @@
 {
   "name": "node-backend",
   "version": "1.0.0",
-  "description": "Pal Kollar's senior thesis",
+  "description": "Pal Kollar's bachelor thesis",
   "main": "index.js",
   "scripts": {
-    "createAdmin": "node src/config/scripts/createAdmin.js"
+    "createAdmin": "node src/config/scripts/createAdmin.js",
+    "start": "node index.js"
   },
   "author": "Pal Kollar",
   "license": "ISC",
