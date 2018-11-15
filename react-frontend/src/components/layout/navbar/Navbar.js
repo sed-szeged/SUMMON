@@ -105,8 +105,10 @@ class Navbar extends Component {
                   </li>
                 </ul>
               </div>
-              <div id="nav-1" className="col l4">
-                <a className="brand-logo">IoT Datasets</a>
+              <div id="nav-1" className="col l4 s4">
+                <Link to="/">
+                  <h5>SUMMON</h5>
+                </Link>
               </div>
               <div id="nav-2" className="col l4">
                 {authLinks}

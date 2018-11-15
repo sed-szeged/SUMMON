@@ -9,6 +9,7 @@ header {
   background-size: cover;
   background-position: center;
   min-height: 1000px;
+  text-align: center;
 }
 
 @media screen and (max-width: 670px) {
