@@ -107,7 +107,9 @@ class Navbar extends Component {
               </div>
               <div id="nav-1" className="col l4 s4">
                 <Link to="/">
-                  <h5>SUMMON</h5>
+                  <h5 className="truncate">
+                    SUMMON - IoT Sensor Trace Archive
+                  </h5>
                 </Link>
               </div>
               <div id="nav-2" className="col l4">
