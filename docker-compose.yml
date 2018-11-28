@@ -23,7 +23,7 @@ services:
     expose:
       - "6200"
     #volumes:
-    #  - ./react-backend:/usr/src/app
+    #  - ./node-backend:/usr/src/app
     ports:
       - "6200:6200"
     command: npm start

@@ -20,11 +20,11 @@ router.post(
     const { error } = validateChartjs2(req.body);
     if (error) return res.status(400).send(errorToJson(error));
     if (!Id.isValid(req.body.dataset)) {
-      return res.status.send(errorMsg.INVALID_OBJECT_ID);
+      return res.status(500).send(errorMsg.INVALID_OBJECT_ID);
     } else {
       const dataset = await Dataset.findById(req.body.dataset);
       if (!dataset) {
-        return res.status.send("Dataset" + errorMsg.NOT_FOUND);
+        return res.status(500).send("Dataset" + errorMsg.NOT_FOUND);
       } else {
         const newChartjs2 = new Chartjs2({
           name: req.body.name,

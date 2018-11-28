@@ -59,11 +59,11 @@ class LandingPage extends Component {
               <p>
                 In this site we group the datasets by their projects of origin,
                 which are categorized by{" "}
-                <Link to="/projects/smartcity">Smart Cities</Link>
+                <Link to="/projects/smartcities">Smart Cities</Link>
                 {", "}
-                <Link to="/projects/organization">Organizations</Link>
+                <Link to="/projects/organizations">Organizations</Link>
                 {" and "}
-                <Link to="/projects/university">Universities</Link>. Here we
+                <Link to="/projects/universities">Universities</Link>. Here we
                 note that we do not own the data; we refer to the project sites,
                 which we used to analyze their publicly published open data.
               </p>
@@ -112,6 +112,24 @@ class LandingPage extends Component {
                 Computing (FMEC), IEEE, 2018.
               </p>
             </div>
+          </div>
+          <div className="row">
+            <h6>Disclaimer</h6>
+            <small>
+              <p>
+                The owners of SUMMON make no representation or warranty, either
+                expressed or implied, in fact or in law, with respect to the
+                accuracy, completeness or appropriateness of the published data,
+                materials or documents contained or referenced herein or
+                provided. In addition, the they shall not be responsible for any
+                action, cost, loss or liability whatsoever arising from the
+                reliance on or use of this or any technical or historical data
+                materials or documents provided. The client is responsible for
+                obtaining their own independent financial, legal, engineering,
+                technical and other advice with respect to any information
+                included in this data, materials or documents provided.
+              </p>
+            </small>
           </div>
         </section>
         <div className="parallax-container">

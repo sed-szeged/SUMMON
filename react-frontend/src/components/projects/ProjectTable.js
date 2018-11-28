@@ -5,15 +5,11 @@ export default props => {
   const displayProjectsBody = props.projects.map((project, index) => {
     return (
       <tr key={index}>
-        <td>
-          <Link className="grey-text" to={"/datasets/" + project._id}>
-            {project.name}
-          </Link>
-        </td>
+        <td>{project.name}</td>
         <td>
           {" "}
           <a
-            className="grey-text"
+            className="blue-text text-darken-4"
             href={project.website}
             target="_blank"
             rel="noopener noreferrer"
@@ -22,7 +18,10 @@ export default props => {
           </a>
         </td>
         <td>
-          <Link className="grey-text" to={"/datasets/" + project._id}>
+          <Link
+            className="blue-text text-darken-4"
+            to={"/datasets/" + project._id}
+          >
             Dataset
           </Link>
         </td>

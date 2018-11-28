@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import projectTypes from "../../utils/constants/projectTypes.json";
+
 export default props => {
   if (!props.project) {
     return <h6>No Porject Table to display</h6>;
@@ -23,8 +26,8 @@ export default props => {
             <td>{props.project.created}</td>
             <td>
               <Link
-                className="grey-text"
-                to={"/projects/" + props.project.projectType}
+                className="blue-text text-darken-4"
+                to={"/projects/" + projectTypes[props.project.projectType]}
               >
                 {props.project.projectType}
               </Link>
@@ -32,7 +35,7 @@ export default props => {
             <td>
               {" "}
               <a
-                className="grey-text"
+                className="blue-text text-darken-4"
                 href={props.project.website}
                 target="_blank"
                 rel="noopener noreferrer"

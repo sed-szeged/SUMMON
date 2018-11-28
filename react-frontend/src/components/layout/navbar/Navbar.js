@@ -6,6 +6,8 @@ import classNames from "classnames";
 import { logoutAdmin } from "../../../redux/actions/auth/authActions";
 import { getDatasetTypesForSelect } from "../../../redux/actions/datasetType/datasetTypeActions";
 
+import "./NavStyle.css";
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -47,26 +49,40 @@ class Navbar extends Component {
           </li>
         </ul>
         <ul id="dropdown-admin" className="dropdown-content">
-          <li>
-            <Link to="/admin/register">Register Admin</Link>
+          <li className="dropdownElement">
+            <Link className="dropdownElement" to="/admin/register">
+              Register Admin
+            </Link>
           </li>
           <li>
-            <Link to="/admin/projects">Project</Link>
+            <Link className="dropdownElement" to="/admin/projects">
+              Project
+            </Link>
           </li>
           <li>
-            <Link to="/admin/datasets">Dataset</Link>
+            <Link className="dropdownElement" to="/admin/datasets">
+              Dataset
+            </Link>
           </li>
           <li>
-            <Link to="/admin/datasettype">Dataset Type</Link>
+            <Link className="dropdownElement" to="/admin/datasettype">
+              Dataset Type
+            </Link>
           </li>
           <li>
-            <Link to="/admin/requestqueries">Request Query</Link>
+            <Link className="dropdownElement" to="/admin/requestqueries">
+              Request Query
+            </Link>
           </li>
           <li>
-            <Link to="/admin/gridfs">File</Link>
+            <Link className="dropdownElement" to="/admin/gridfs">
+              File
+            </Link>
           </li>
           <li>
-            <Link to="/admin/chartjs2">Chartjs 2</Link>
+            <Link className="dropdownElement" to="/admin/chartjs2">
+              Chartjs 2
+            </Link>
           </li>
         </ul>
       </div>
@@ -121,13 +137,19 @@ class Navbar extends Component {
 
         <ul id="dropdown-projects" className="dropdown-content">
           <li>
-            <Link to="/projects/smartcity">Smart Cities</Link>
+            <Link className="dropdownElement" to="/projects/smartcities">
+              Smart Cities
+            </Link>
           </li>
           <li>
-            <Link to="/projects/organization">Organizations</Link>
+            <Link className="dropdownElement" to="/projects/organizations">
+              Organizations
+            </Link>
           </li>
           <li>
-            <Link to="/projects/university">Universities</Link>
+            <Link className="dropdownElement" to="/projects/universities">
+              Universities
+            </Link>
           </li>
         </ul>
 
@@ -135,7 +157,12 @@ class Navbar extends Component {
           {this.state.datasetType.map((dT, index) => {
             return (
               <li key={"dT-" + index}>
-                <Link to={"/datasettype/" + dT.value}>{dT.label}</Link>
+                <Link
+                  className="dropdownElement"
+                  to={"/datasettype/" + dT.value}
+                >
+                  {dT.label}
+                </Link>
               </li>
             );
           })}
@@ -143,13 +170,19 @@ class Navbar extends Component {
 
         <ul className="sidenav" id="mobile-sidebar">
           <li>
-            <Link to="/projects/smartcity">Smart Cities</Link>
+            <Link className="dropdownElement" to="/projects/smartcity">
+              Smart Cities
+            </Link>
           </li>
           <li>
-            <Link to="/projects/organization">Organizations</Link>
+            <Link className="dropdownElement" to="/projects/organization">
+              Organizations
+            </Link>
           </li>
           <li>
-            <Link to="/projects/university">Universities</Link>
+            <Link className="dropdownElement" to="/projects/university">
+              Universities
+            </Link>
           </li>
         </ul>
       </div>

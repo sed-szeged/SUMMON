@@ -21,7 +21,7 @@ export default props => {
             <td>
               {props.dataset.website ? (
                 <a
-                  className="grey-text"
+                  className="blue-text text-darken-4"
                   href={props.dataset.website}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -34,7 +34,7 @@ export default props => {
             </td>
             <td>
               <Link
-                className="grey-text"
+                className="blue-text text-darken-4"
                 to={"/datasettype/" + datasetType._id}
               >
                 {datasetType.name}
@@ -42,7 +42,7 @@ export default props => {
             </td>
             <td>
               <Link
-                className="grey-text"
+                className="blue-text text-darken-4"
                 to={"/datasets/" + props.dataset.project}
               >
                 Project Link

@@ -9,11 +9,11 @@ export default () => {
         <div className="row">
           <div className="col s12 l12">
             <h5>Contact us</h5>
-            <p>
+            <div>
               <a href="mailto:iolt@sed.hu" target="_top">
                 Internet of Living Things project
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>

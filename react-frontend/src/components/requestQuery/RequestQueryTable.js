@@ -18,7 +18,7 @@ export default props => {
               <td>
                 {" "}
                 <a
-                  className="grey-text"
+                  className="blue-text text-darken-4"
                   href={rq.queryURI}
                   target="_blank"
                   rel="noopener noreferrer"

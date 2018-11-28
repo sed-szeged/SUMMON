@@ -36,3 +36,8 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}

@@ -7,7 +7,10 @@ export default props => {
       return (
         <tr key={index}>
           <td>
-            <Link className="grey-text" to={"/dataset/" + dataset._id}>
+            <Link
+              className="blue-text text-darken-4"
+              to={"/dataset/" + dataset._id}
+            >
               {dataset.name}
             </Link>
           </td>
@@ -15,7 +18,7 @@ export default props => {
           <td>
             {dataset.website ? (
               <a
-                className="grey-text"
+                className="blue-text text-darken-4"
                 href={dataset.website}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -29,7 +32,7 @@ export default props => {
           <td>
             {dataset.datasetType.name ? (
               <Link
-                className="grey-text"
+                className="blue-text text-darken-4"
                 to={"/datasettype/" + dataset.datasetType._id}
               >
                 {dataset.datasetType.name}

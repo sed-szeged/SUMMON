@@ -8,6 +8,8 @@ import ProjectTable from "./ProjectTable";
 
 import { getProjectByType } from "../../redux/actions/project/projectActions";
 
+import projectTypes from "../../utils/constants/projectTypes.json";
+
 class Projects extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,7 @@ class Projects extends Component {
 
   getProject = () => {
     this.props
-      .getProjectByType(this.props.match.params.projectType)
+      .getProjectByType(projectTypes[this.props.match.params.projectType])
       .then(res => {
         this.setState({ projects: res });
       });
