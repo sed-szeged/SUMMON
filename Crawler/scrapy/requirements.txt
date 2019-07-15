@@ -1,0 +1,8 @@
+Twisted==18.7.0
+pyOpenSSL
+pyasn1-modules
+scrapy
+scrapyd
+scrapyd-client
+pymongo
+selenium
