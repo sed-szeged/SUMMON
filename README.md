@@ -1,24 +1,7 @@
-SUMMON Project
-Smart city Usage data Management and MONitoring
-Bachelors degree project
+SUMMON - Smart system Usage data Management and MONitoring project
 
-iotdataset_commands.txt containes commands for the project
+It provides an IoT and sensor data trace archive, with the aim to contribute to the proliferation of integrated IoT and cloud technologies by enabling simulated experimentation with applications using real data.
 
-Merge the database with the old version:
-Dump the old version
-Copy every collection starting with: REQUEST_QUERY
-Add all these collections to the new database folder
-Remove the old database and import the new one
+Main authors: Tamas Pflanzner, Pal Kollar, Zoltan Feher
 
-Image links in ./react-frontend/src/images
-skyscraper.jpeg: https://unsplash.com/photos/nUa0xdLrKqw
-measure.jpeg: https://unsplash.com/photos/zPZ9vqqDNBA
-
-Images by Bálint Maczák:
-dom.jpg
-gom1.jpg
-dom2.jpg
-landing.jpg
-
-Authors
-Pál Kollár
+Images were provided by Balint Maczak and Unsplash.com
