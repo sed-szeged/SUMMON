@@ -1,3 +1,5 @@
+import datetime
+
 import scrapy
 
 
@@ -7,12 +9,15 @@ class LiveTrafficSpider(scrapy.Spider):
 
     def parse(self, response):
         xpath = "//div[@class='container']"
+        current_time = datetime.datetime.now()
         for element in response.xpath(xpath):
             item = dict()
             item['location'] = element.xpath('.//span[contains(@class, "iw-traffic-location")]/text()').extract_first()
             item['date'] = element.xpath('.//div[@class="iw-traffic-date"]/text()').extract_first()
             item['title'] = element.xpath('.//div[@class="iw-traffic-title"]/text()').extract_first()
             item['desc'] = element.xpath('.//div[@class="iw-traffic-desc"]/text()').extract_first()
+            item['save_time'] = current_time
+
             # item['alert_code'] = element.xpath('(.//p)[1]/text()').extract_first()
             # item['id'] = element.xpath('(.//p)[2]/text()').extract_first()
             # item['type'] = element.xpath('(.//p)[3]/text()').extract_first()

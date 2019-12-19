@@ -31,5 +31,5 @@ ITEM_PIPELINES = {
 # FEED_URI = 'file:///C:/Users/Fehér Zoltán/Documents/szte/szakdolgozat/iot-datamining/idokep/result.jl'
 # FEED_EXPORT_ENCODING = 'utf-8'
 
-MONGO_URI = 'mongodb://mongodb:27017'
+MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DATABASE = 'iot_mining'

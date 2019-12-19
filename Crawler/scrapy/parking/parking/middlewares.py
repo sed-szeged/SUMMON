@@ -16,7 +16,9 @@ class ParkingWindow(object):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
-        self.driver = webdriver.Chrome(chrome_options=options)
+        options.add_argument('--window-size=1920,1080')
+
+        self.driver = webdriver.Chrome(executable_path='c:\\chromedriver.exe', chrome_options=options)
         self.driver.implicitly_wait(1)
 
     def process_request(self, request, spider):

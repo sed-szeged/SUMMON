@@ -35,5 +35,5 @@ ITEM_PIPELINES = {
 
 FEED_EXPORT_ENCODING = 'utf-8'
 
-MONGO_URI = 'mongodb://mongodb:27017'
+MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DATABASE = 'iot_mining'

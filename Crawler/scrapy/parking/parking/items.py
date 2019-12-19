@@ -9,7 +9,8 @@ import scrapy
 
 
 class ParkingItem(scrapy.Item):
-    time = scrapy.Field()
+    save_time = scrapy.Field()
     address = scrapy.Field()
     location = scrapy.Field()
     used = scrapy.Field()
+

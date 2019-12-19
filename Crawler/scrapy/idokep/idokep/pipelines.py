@@ -13,7 +13,7 @@ from datetime import date, timedelta
 
 
 class MongoDBPipelineIdokep(object):
-    collection_name = 'idokep'
+    collection_name = 'new_idokep'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri

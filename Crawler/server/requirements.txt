@@ -1,4 +1,4 @@
 pymongo
 flask
 requests
-apscheduler
+apscheduler==2.1.2

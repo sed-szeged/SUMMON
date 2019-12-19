@@ -4,7 +4,7 @@ import atexit
 import pymongo
 import werkzeug
 
-from flask import Flask, redirect, jsonify
+from flask import Flask, redirect, jsonify, json
 from flask import request
 import requests
 from apscheduler.scheduler import Scheduler
@@ -13,11 +13,26 @@ from apscheduler.scheduler import Scheduler
 app = Flask(__name__)
 cron = Scheduler(daemon=True)
 cron.start()
-
-client = pymongo.MongoClient("mongodb://mongodb:27017/")
+client = pymongo.MongoClient("mongodb://localhost:27017/")
 database = client.get_database("iot_mining")
 
-@cron.interval_schedule(hours=2)
+
+def create_json(elements):
+    results = list()
+    for document in elements:
+        new_document = {}
+        for key, value in document.items():
+            new_document.update({key: str(value)})
+        results.append(new_document)
+
+    return app.response_class(
+        response=json.dumps(results),
+        status=200,
+        mimetype='application/json'
+    )
+
+
+@cron.interval_schedule(hours=1)
 def start():
     for element in ['idokep', 'livetraffic', 'parking']:
         data = {
@@ -122,7 +137,11 @@ def get_data(collection):
         query['time'] = time
     try:
         collection = database.get_collection(collection)
-        return str([row for row in collection.find(query)])
+
+        first_element = collection.find().sort('save_time', -1).limit(1)
+        query['save_time'] = first_element[0]['save_time']
+        elements = [row for row in collection.find(query)]
+        return create_json(elements)
     except Exception as e:
         raise InternalConnectionError('Database connection failed', status_code=500)
 
@@ -134,16 +153,21 @@ def get_data_by_query(collection):
     if 'from' in query and query['from'] is not None:
         date = datetime.strptime(query['from'], '%Y-%m-%dT%H:%M')
         time['$gte'] = date
-        query['time'] = time
+        query['save_time'] = time
         del query['from']
     if 'to' in query and query['to'] is not None:
         date = datetime.strptime(query['to'], '%Y-%m-%dT%H:%M')
         time['$lt'] = date
-        query['time'] = time
+        query['save_time'] = time
         del query['to']
+    if not query:
+        first_element = collection.find().sort('save_time', -1).limit(1)
+        query['save_time'] = first_element[0]['save_time']
+
     try:
         collection = database.get_collection(collection)
-        return str([row for row in collection.find(query)])
+        elements = [row for row in collection.find(query)]
+        return create_json(elements)
     except Exception as e:
         raise InternalConnectionError('Database connection failed', status_code=500)
 
@@ -152,10 +176,14 @@ def get_data_by_query(collection):
 def get_collection_keys(collection):
     try:
         collection = database.get_collection(collection)
-        return str(list(collection.find_one().keys()))
+        elements = [row for row in collection.find_one().keys()]
+        return app.response_class(
+            response=json.dumps(elements),
+            status=200,
+            mimetype='application/json')
     except Exception as e:
         raise InternalConnectionError('Database connection failed', status_code=500)
 
 
 app.run(host="0.0.0.0", port="7000")
-# atexit.register(lambda: cron.shutdown(wait=False))
+atexit.register(lambda: cron.shutdown(wait=False))
