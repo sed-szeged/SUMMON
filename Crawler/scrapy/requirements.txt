@@ -1,4 +1,4 @@
-Twisted==18.7.0
+Twisted==22.1.0
 pyOpenSSL
 pyasn1-modules
 scrapy
